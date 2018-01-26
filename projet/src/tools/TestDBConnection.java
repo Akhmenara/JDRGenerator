@@ -9,17 +9,24 @@ public class TestDBConnection {
 
 	public static void main(String[] args) {
 
+		String url = "jdbc:mysql://localhost:3306/jdrgenerator?useSSL=false";
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/jdrgenerator?useSSL=false";
-			
-			Connection con = DriverManager.getConnection(url, "root", "");
-			Statement stmt = (Statement) con.createStatement();
 
-			stmt.executeUpdate(("CREATE TABLE MONSTRE(NOM_MONSTRE VARCHAR(32),ID_MONSTRE INTEGER)"));
+			System.out.println("Trying to connect...");
+
+			Connection con = DriverManager.getConnection(url, "root", "");
+			
+			System.out.println("Connection Established Successfull and the DATABASE NAME IS:"
+                    + con.getMetaData().getDatabaseProductName());
+			
+			//Quick table creation test
+			//Statement stmt = (Statement) con.createStatement();
+			//stmt.executeUpdate(("CREATE TABLE TEST(NOM VARCHAR(32),ID INTEGER)"));
 			
 		} catch (Exception e) {
-
+			System.out.println("Unable to connect to the DB");
 			e.printStackTrace();
 		}
 	}
