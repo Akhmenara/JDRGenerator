@@ -3,17 +3,17 @@ package models;
 public class Monstre extends Entite{
 	
 	public Monstre(int[] stats) {
-		this.setForce(stats[1]);
-		this.setDexterite(stats[2]);
-		this.setConstitution(stats[3]);
-		this.setIntelligence(stats[4]);
-		this.setSagesse(stats[5]);
-		this.setCharisme(stats[6]);
+		this.setForce(stats[0]);
+		this.setDexterite(stats[1]);
+		this.setConstitution(stats[2]);
+		this.setIntelligence(stats[3]);
+		this.setSagesse(stats[4]);
+		this.setCharisme(stats[5]);
 	}
 	
 	
-	public int Force() {
-		return this.getForce();
+	public int getForce() {
+		return super.getForce();
 	}
 	
 	public void setForce(int force) {
@@ -62,7 +62,7 @@ public class Monstre extends Entite{
 	
 	public static Monstre creerMonstreAleaNorm(int[] moyennes, int[] variances) {
 		int[] stats = new int[6];
-		for (int i = 0; i<6; stats[i++] = RandomStat.randn(moyennes[i++],variances[i++])) {}
+		for (int i = 0; i<6; stats[i] = RandomStat.randn(moyennes[i],variances[i++])) {}
 		return new Monstre(stats);
 	}
 	
@@ -70,10 +70,18 @@ public class Monstre extends Entite{
 		Monstre[] mobs = new Monstre[nombre];
 		for (int i = 0; i < nombre; i++) {
 			int[] stats = new int[6];
-			for (int j = 0; j < 6; stats[j++] = RandomStat.randn(moyennes[j++],variances[j++])) {}
+			for (int j = 0; j < 6; stats[j] = RandomStat.randn(moyennes[j],variances[j++])) {}
 			mobs[i] = new Monstre(stats);
 		}
 		return mobs;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Monstre [Force = " + getForce() + ", Dexterite = " + getDexterite() + ", Constitution = "
+				+ getConstitution() + ", Intelligence = " + getIntelligence() + ", Sagesse = " + getSagesse()
+				+ ", Charisme = " + getCharisme() + "]";
 	}
 	
 	
