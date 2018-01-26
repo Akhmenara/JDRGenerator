@@ -1,58 +1,58 @@
 package models;
 
 abstract class Entite {
-	private float force;
-	private float dexterite;
-	private float constitution;
-	private float intelligence;
-	private float sagesse;
-	private float charisme;
+	private int force;
+	private int dexterite;
+	private int constitution;
+	private int intelligence;
+	private int sagesse;
+	private int charisme;
 	
-	protected float getForce() {
+	protected int getForce() {
 		return force;
 	}
 	
-	protected void setForce(float force) {
+	protected void setForce(int force) {
 		this.force = force;
 	}
 	
-	protected float getDexterite() {
+	protected int getDexterite() {
 		return dexterite;
 	}
 	
-	protected void setDexterite(float dexterite) {
+	protected void setDexterite(int dexterite) {
 		this.dexterite = dexterite;
 	}
 	
-	protected float getConstitution() {
+	protected int getConstitution() {
 		return constitution;
 	}
 	
-	protected void setConstitution(float constitution) {
+	protected void setConstitution(int constitution) {
 		this.constitution = constitution;
 	}
 	
-	protected float getIntelligence() {
+	protected int getIntelligence() {
 		return intelligence;
 	}
 	
-	protected void setIntelligence(float intelligence) {
+	protected void setIntelligence(int intelligence) {
 		this.intelligence = intelligence;
 	}
 	
-	protected float getSagesse() {
+	protected int getSagesse() {
 		return sagesse;
 	}
 	
-	protected void setSagesse(float sagesse) {
+	protected void setSagesse(int sagesse) {
 		this.sagesse = sagesse;
 	}
 	
-	protected float getCharisme() {
+	protected int getCharisme() {
 		return charisme;
 	}
 	
-	protected void setCharisme(float charisme) {
+	protected void setCharisme(int charisme) {
 		this.charisme = charisme;
 	}
 }

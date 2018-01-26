@@ -2,7 +2,7 @@ package models;
 
 public class Monstre extends Entite{
 	
-	public Monstre(float[] stats) {
+	public Monstre(int[] stats) {
 		this.setForce(stats[1]);
 		this.setDexterite(stats[2]);
 		this.setConstitution(stats[3]);
@@ -12,57 +12,57 @@ public class Monstre extends Entite{
 	}
 	
 	
-	public float getForce() {
+	public int Force() {
 		return this.getForce();
 	}
 	
-	public void setForce(float force) {
-		this.setForce(force);
+	public void setForce(int force) {
+		super.setForce(force);
 	}
 	
-	public float getDexterite() {
-		return this.getDexterite();
+	public int getDexterite() {
+		return super.getDexterite();
 	}
 	
-	public void setDexterite(float dexterite) {
-		this.setDexterite(dexterite);
+	public void setDexterite(int dexterite) {
+		super.setDexterite(dexterite);
 	}
 	
-	public float getConstitution() {
-		return this.getConstitution();
+	public int getConstitution() {
+		return super.getConstitution();
 	}
 	
-	public void setConstitution(float constitution) {
-		this.setConstitution(constitution);
+	public void setConstitution(int constitution) {
+		super.setConstitution(constitution);
 	}
 	
-	public float getIntelligence() {
-		return this.getIntelligence();
+	public int getIntelligence() {
+		return super.getIntelligence();
 	}
 	
-	public void setIntelligence(float intelligence) {
-		this.setIntelligence(intelligence);
+	public void setIntelligence(int intelligence) {
+		super.setIntelligence(intelligence);
 	}
 	
-	public float getSagesse() {
-		return this.getSagesse();
+	public int getSagesse() {
+		return super.getSagesse();
 	}
 	
-	public void setSagesse(float sagesse) {
-		this.setSagesse(sagesse);
+	public void setSagesse(int sagesse) {
+		super.setSagesse(sagesse);
 	}
 	
-	public float getCharisme() {
-		return this.getCharisme();
+	public int getCharisme() {
+		return super.getCharisme();
 	}
 	
-	public void setCharisme(float charisme) {
-		this.setCharisme(charisme);
+	public void setCharisme(int charisme) {
+		super.setCharisme(charisme);
 	}
 	
-	public static Monstre creerMonstreAleaNorm(float[] moyennes, float[] variances) {
-		float[] stats = new float[6];
-		for (int i = 0; i<6; stats[i++] = random.randn(moyennes[i++],variances[i++])) {}
+	public static Monstre creerMonstreAleaNorm(int[] moyennes, int[] variances) {
+		int[] stats = new int[6];
+		for (int i = 0; i<6; stats[i++] = RandomStat.randn(moyennes[i++],variances[i++])) {}
 		return new Monstre(stats);
 	}
 	
