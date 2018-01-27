@@ -22,7 +22,7 @@ public class Accueil {
 	private final int VARIANCE = 4;
 	private CardLayout card = new CardLayout();
 	
-	private JFrame fenetre = new JFrame("Acceuil");
+	private JFrame fenetre = new JFrame("Accueil");
 	
 	private JButton boutonPlus1Esperance = new JButton("+1");
 	private JButton boutonMoins1Esperance = new JButton("-1");
