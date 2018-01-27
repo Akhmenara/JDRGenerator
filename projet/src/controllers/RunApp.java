@@ -13,7 +13,8 @@ public class RunApp {
 		db = new Database();
 		
 		// Static call to the method
-		System.out.println(Database.getAllMonsters());
+		System.out.println(Database.getAllMonsters() + "\n");
+		System.out.println(Database.getMonsterByName("Goblin"));
 
 	}
 
