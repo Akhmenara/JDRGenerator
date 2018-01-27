@@ -13,7 +13,7 @@ abstract class Entite {
 	}
 	
 	protected void setForce(int force) {
-		this.force = force;
+		this.force = verif(force);
 	}
 	
 	protected int getDexterite() {
@@ -21,7 +21,7 @@ abstract class Entite {
 	}
 	
 	protected void setDexterite(int dexterite) {
-		this.dexterite = dexterite;
+		this.dexterite = verif(dexterite);
 	}
 	
 	protected int getConstitution() {
@@ -29,7 +29,7 @@ abstract class Entite {
 	}
 	
 	protected void setConstitution(int constitution) {
-		this.constitution = constitution;
+		this.constitution = verif(constitution);
 	}
 	
 	protected int getIntelligence() {
@@ -37,7 +37,7 @@ abstract class Entite {
 	}
 	
 	protected void setIntelligence(int intelligence) {
-		this.intelligence = intelligence;
+		this.intelligence = verif(intelligence);
 	}
 	
 	protected int getSagesse() {
@@ -45,7 +45,7 @@ abstract class Entite {
 	}
 	
 	protected void setSagesse(int sagesse) {
-		this.sagesse = sagesse;
+		this.sagesse = verif(sagesse);
 	}
 	
 	protected int getCharisme() {
@@ -53,6 +53,15 @@ abstract class Entite {
 	}
 	
 	protected void setCharisme(int charisme) {
-		this.charisme = charisme;
+		this.charisme = verif(charisme);
+	}
+	
+	private int verif(int x) {
+		if (x > 3) {
+			return x;
+			
+		}else {
+			return 3;
+		}
 	}
 }
