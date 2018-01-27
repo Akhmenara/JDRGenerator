@@ -58,12 +58,13 @@ abstract class Entite {
 	}
 	
 	protected String getNom() {
-		return this.nom;
+		return nom;
 	}
 	
 	protected void setNom(String nom) {
-			this.nom = nom;
+		this.nom = nom;
 	}
+	
 	private int verif(int x) {
 		if (x > 3) {
 			return x;
