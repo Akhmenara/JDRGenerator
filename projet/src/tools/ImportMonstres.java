@@ -1,6 +1,5 @@
 package tools;
 
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,7 +13,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mysql.jdbc.Statement;
- 
+
+/**
+ * Class used to import monsters in DB from a json file
+ * Run this file once to create the table and to fill it
+ */
 public class ImportMonstres {
 	public static void main(String[] args) throws FileNotFoundException, JSONException {
 		String jsonData = "";
@@ -27,15 +30,15 @@ public class ImportMonstres {
 			Connection connection = DriverManager.getConnection(url, "root", "");
 			System.out.println("Connection established successfull");
 					
-			//--------------------------------------
-			//Create the table to store the monsters
+			//---------------------------------------
+			// Create the table to store the monsters
 			Statement createTable = (Statement) connection.createStatement();
 			createTable.executeUpdate("CREATE TABLE `monstres` (`id_monstre` int(11) NOT NULL, `nom_monstre` varchar(99) DEFAULT NULL, `taille_monstre` enum('Tiny','Small','Medium','Large','Huge','Gargantuan') NOT NULL, `for_monstre` int(11) DEFAULT NULL, `dex_monstre` int(11) DEFAULT NULL, `con_monstre` int(11) DEFAULT NULL, `int_monstre` int(11) DEFAULT NULL, `sag_monstre` int(11) DEFAULT NULL, `cha_monstre` int(11) DEFAULT NULL)");
 			Statement primaryKey = (Statement) connection.createStatement();
 			primaryKey.executeUpdate("ALTER TABLE `Monstres` ADD PRIMARY KEY (`id_monstre`);");
 			Statement autoInc = (Statement) connection.createStatement();
 			autoInc.executeUpdate("ALTER TABLE `Monstres` MODIFY `id_monstre` int(11) NOT NULL AUTO_INCREMENT;");
-			//--------------------------------------			
+			//---------------------------------------			
 			
 			long debut = System.currentTimeMillis();
 			String line;
@@ -52,15 +55,18 @@ public class ImportMonstres {
 			System.out.println("JSONArray length : " + arr.length());
 			
 			/*
-			<name>Goblin</name>
-	        <size>S</size>
-	        <str>8</str>
-	        <dex>14</dex>
-	        <con>10</con>
-	        <int>10</int>
-	        <wis>8</wis>
-	        <cha>8</cha>
-		 */
+			 * Exemple of datas extracted from the JSON file and stored in db
+			 * {
+			 *   "name": "Goblin",
+			 *   "size": "Small",
+			 *   "strength": 8,
+			 *   "dexterity": 14,
+			 *   "constitution": 10,
+			 *   "intelligence": 10,
+			 *   "wisdom": 8,
+			 *   "charisma": 8
+			 * }
+	         */
 			int nbInsert = 0;
 			Statement insertInto = (Statement) connection.createStatement();
 			for(int i = 0 ; i < arr.length()-1 ; i++){

@@ -7,6 +7,7 @@ abstract class Entite {
 	private int intelligence;
 	private int sagesse;
 	private int charisme;
+	private String nom;
 	
 	protected int getForce() {
 		return force;
@@ -54,6 +55,14 @@ abstract class Entite {
 	
 	protected void setCharisme(int charisme) {
 		this.charisme = verif(charisme);
+	}
+	
+	protected String getNom() {
+		return nom;
+	}
+	
+	protected void setNom(String nom) {
+		this.nom = nom;
 	}
 	
 	private int verif(int x) {

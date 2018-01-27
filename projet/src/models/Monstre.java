@@ -2,6 +2,16 @@ package models;
 
 public class Monstre extends Entite{
 	
+	public Monstre(String nom, int[] stats) {
+		this.setForce(stats[0]);
+		this.setDexterite(stats[1]);
+		this.setConstitution(stats[2]);
+		this.setIntelligence(stats[3]);
+		this.setSagesse(stats[4]);
+		this.setCharisme(stats[5]);
+		this.setNom(nom);
+	}
+	
 	public Monstre(int[] stats) {
 		this.setForce(stats[0]);
 		this.setDexterite(stats[1]);
@@ -9,6 +19,7 @@ public class Monstre extends Entite{
 		this.setIntelligence(stats[3]);
 		this.setSagesse(stats[4]);
 		this.setCharisme(stats[5]);
+		this.setNom("Default");
 	}
 	
 	
@@ -60,6 +71,14 @@ public class Monstre extends Entite{
 		super.setCharisme(charisme);
 	}
 	
+	public String getNom() {
+		return super.getNom();
+	}
+	
+	public void setNom(String nom) {
+		super.setNom(nom);
+	}
+	
 	public static Monstre creerMonstreAleaNorm(int[] moyennes, int[] variances) {
 		int[] stats = new int[6];
 		for (int i = 0; i<6; stats[i] = RandomStat.randn(moyennes[i],variances[i++])) {}
@@ -76,12 +95,18 @@ public class Monstre extends Entite{
 		return mobs;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Monstre [Force = " + getForce() + ", Dexterite = " + getDexterite() + ", Constitution = "
-				+ getConstitution() + ", Intelligence = " + getIntelligence() + ", Sagesse = " + getSagesse()
-				+ ", Charisme = " + getCharisme() + "]";
+		if(this.getNom() == null || this.getNom().equals("")){
+			return "Monstre [Force = " + getForce() + ", Dexterite = " + getDexterite() + ", Constitution = "
+					+ getConstitution() + ", Intelligence = " + getIntelligence() + ", Sagesse = " + getSagesse()
+					+ ", Charisme = " + getCharisme() + "]";
+		}
+		else{
+			return this.getNom() + " [Force = " + getForce() + ", Dexterite = " + getDexterite() + ", Constitution = "
+					+ getConstitution() + ", Intelligence = " + getIntelligence() + ", Sagesse = " + getSagesse()
+					+ ", Charisme = " + getCharisme() + "]";
+		}
 	}
 	
 	
