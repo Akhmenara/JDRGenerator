@@ -1,6 +1,7 @@
 package tools;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class ImportMonstres {
 		String jsonData = "";
 		BufferedReader br = null;
 		String url = "jdbc:mysql://localhost:3306/jdrgenerator?useSSL=false";
-		
+		System.out.println(new File(".").getAbsoluteFile());
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Trying to connect...");
@@ -42,7 +43,7 @@ public class ImportMonstres {
 			long debut = System.currentTimeMillis();
 			String line;
 			int nbLines = 0;
-			br = new BufferedReader(new FileReader("./projet/src/tools/Monstres.json"));
+			br = new BufferedReader(new FileReader("./src/tools/Monstres.json"));
 			while ((line = br.readLine()) != null) {
 				jsonData += line + "\n";
 				nbLines++;

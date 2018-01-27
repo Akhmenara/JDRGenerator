@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -13,7 +15,7 @@ import models.Monstre;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
-
+import controllers.Database;
 public class Accueil {
 	private final int ESPERANCE = 10;
 	private final int VARIANCE = 2;
@@ -43,7 +45,7 @@ public class Accueil {
 	private JTextField zone_text_Variance = new JTextField(Integer.toString(VARIANCE));
 	
 	private JPanel content = new JPanel();
-	
+	private static ArrayList<Monstre> monstres = Database.getAllMonsters();
 	private int nbrMonstre = 0;
 	public Accueil() {
 		fenetre.setSize(1280,720);
@@ -63,8 +65,6 @@ public class Accueil {
 		
 		zone_text_Variance.setPreferredSize(new Dimension(150, 30));
 		panVariance.add(zone_text_Variance);
-		
-		
 		
 		
 		boutonPlus1Esperance.addActionListener(new ActionListener() {
@@ -105,7 +105,12 @@ public class Accueil {
 		boutonVariance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				variance = Integer.parseInt(zone_text_Variance.getText());
-				int[] esperances = {esperance,esperance,esperance,esperance,esperance,esperance};
+				int[] esperances = {monstres.get(nbrMonstre).getForce(),
+						monstres.get(nbrMonstre).getDexterite(),
+						monstres.get(nbrMonstre).getConstitution(),
+						monstres.get(nbrMonstre).getIntelligence(),
+						monstres.get(nbrMonstre).getSagesse(),
+						monstres.get(nbrMonstre).getCharisme()};
 				int[] variances = {variance,variance,variance,variance,variance,variance};
 				Monstre mob = Monstre.creerMonstreAleaNorm(esperances,variances);
 				nbrMonstre++;
