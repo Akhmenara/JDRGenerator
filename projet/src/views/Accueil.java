@@ -1,6 +1,6 @@
 package views;
 import javax.swing.JFrame;
-
+import javax.swing.JLabel;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -20,8 +20,8 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import controllers.Database;
 public class Accueil {
-	private final int ESPERANCE = 10;
-	private final int VARIANCE = 2;
+	private final int ESPERANCE = 1;
+	private final int VARIANCE = 4;
 	private CardLayout card = new CardLayout();
 	
 	private JFrame fenetre = new JFrame("Acceuil");
@@ -44,14 +44,14 @@ public class Accueil {
 	
 	private JPanel panVariance = new JPanel();
 	
-	
+	private JLabel labelNbrMontre = new JLabel("Nombre : ");
 	private JTextField zone_text_Esperance = new JTextField(Integer.toString(ESPERANCE));
 	
 	private JTextField zone_text_Variance = new JTextField(Integer.toString(VARIANCE));
 	
 	private JPanel content = new JPanel();
-	private static ArrayList<Monstre> monstres = Database.getAllMonsters();
-	private int nbrMonstre = monstres.size();
+	private static ArrayList<Monstre> MONSTRES = Database.getAllMonsters();
+	private static int NBR_MONSTRE = MONSTRES.size();
 	public Accueil() {
 		fenetre.setSize(1280,720);
 		fenetre.setLocationRelativeTo(null);
@@ -61,11 +61,12 @@ public class Accueil {
 		panEsperance.add(boutonEsperance, BorderLayout.CENTER);
 		//panEsperance.add(boutonMoins1Esperance, BorderLayout.WEST);
 		
-		//zone_text_Esperance.setPreferredSize(new Dimension(150, 30));
-		//panEsperance.add(zone_text_Esperance);
 		
-		for (int i = 0; i<nbrMonstre; choixMonstre.addItem(monstres.get(i++).getNom()));
+		
+		for (int i = 0; i<NBR_MONSTRE; choixMonstre.addItem(MONSTRES.get(i++).getNom()));
 		panEsperance.add(choixMonstre);
+		panEsperance.add(zone_text_Esperance);
+		zone_text_Esperance.setPreferredSize(new Dimension(150, 30));
 		
 		//panVariance.add(boutonPlus1Variance, BorderLayout.EAST);
 		panVariance.add(boutonVariance, BorderLayout.CENTER);
@@ -114,7 +115,8 @@ public class Accueil {
 		boutonVariance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				variance = Integer.parseInt(zone_text_Variance.getText());
-				Monstre monstreBase = monstres.get(choixMonstre.getSelectedIndex());
+				Monstre monstreBase = MONSTRES.get(choixMonstre.getSelectedIndex());
+				int nbrMonstre = Integer.parseInt(zone_text_Esperance.getText());
 				int[] esperances = {monstreBase.getForce(),
 						monstreBase.getDexterite(),
 						monstreBase.getConstitution(),
@@ -122,9 +124,9 @@ public class Accueil {
 						monstreBase.getSagesse(),
 						monstreBase.getCharisme()};
 				int[] variances = {variance,variance,variance,variance,variance,variance};
-				Monstre mob = Monstre.creerMonstreAleaNorm(monstreBase.getNom(),esperances,variances);
-				nbrMonstre++;
-				FenetreMonstre fenetreMob = new FenetreMonstre(mob);
+				Monstre[] mobs = Monstre.creerMonstreAleaNorm(monstreBase.getNom(),esperances,variances,nbrMonstre);
+				FenetreMonstre[] fenetresMob = new FenetreMonstre[mobs.length];
+				for (int k = 0 ; k < mobs.length; fenetresMob[k] = new FenetreMonstre(mobs[k++]));
 				
 				esperance = ESPERANCE;
 				variance = VARIANCE;

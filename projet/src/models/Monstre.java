@@ -106,7 +106,7 @@ public class Monstre extends Entite{
 		for (int i = 0; i < nombre; i++) {
 			int[] stats = new int[6];
 			for (int j = 0; j < 6; stats[j] = RandomStat.randn(moyennes[j],variances[j++])) {}
-			mobs[i] = new Monstre(nom + i,stats);
+			mobs[i] = new Monstre(nom +" "+ (i +1),stats);
 		}
 		return mobs;
 	}
