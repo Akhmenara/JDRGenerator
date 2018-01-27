@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -62,7 +64,7 @@ public class Accueil {
 		//zone_text_Esperance.setPreferredSize(new Dimension(150, 30));
 		//panEsperance.add(zone_text_Esperance);
 		
-		for (int i = 0; i<nbrMonstre; choixMonstre.addItem(monstres.get(i++).getNom()))
+		for (int i = 0; i<nbrMonstre; choixMonstre.addItem(monstres.get(i++).getNom()));
 		panEsperance.add(choixMonstre);
 		
 		//panVariance.add(boutonPlus1Variance, BorderLayout.EAST);
@@ -112,7 +114,7 @@ public class Accueil {
 		boutonVariance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				variance = Integer.parseInt(zone_text_Variance.getText());
-				Monstre monstreBase = monstres.get(nbrMonstre);
+				Monstre monstreBase = monstres.get(choixMonstre.getSelectedIndex());
 				int[] esperances = {monstreBase.getForce(),
 						monstreBase.getDexterite(),
 						monstreBase.getConstitution(),
@@ -144,7 +146,7 @@ public class Accueil {
 	public void afficher() {
 		fenetre.setVisible(true);
 	}
-
+	
 
 	
 }
