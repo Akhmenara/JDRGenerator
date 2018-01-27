@@ -1,15 +1,16 @@
 package views;
 import javax.swing.JFrame;
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import models.Monstre;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
 
 public class Accueil {
 	private final int ESPERANCE = 10;
@@ -22,7 +23,7 @@ public class Accueil {
 	private JButton boutonMoins1Esperance = new JButton("-1");
 	
 	private int esperance = ESPERANCE;
-	private JButton boutonEsperance = new JButton("Esperance :" + esperance);
+	private JButton boutonEsperance = new JButton("Esperance :" );//+ esperance);
 	
 	private JPanel panEsperance = new JPanel();
 	
@@ -30,7 +31,7 @@ public class Accueil {
 	private JButton boutonMoins1Variance = new JButton("-1");
 	
 	private int variance = VARIANCE;
-	private JButton boutonVariance = new JButton("Variance :" + variance);
+	private JButton boutonVariance = new JButton("Variance :" );//+ variance);
 	
 	private JPanel panVariance = new JPanel();
 	
@@ -38,6 +39,9 @@ public class Accueil {
 	private JButton boutonMonstre = new JButton();
 	private JPanel panMonstre = new JPanel();
 	
+	private JTextField zone_text_Esperance = new JTextField(Integer.toString(ESPERANCE));
+	
+	private JTextField zone_text_Variance = new JTextField(Integer.toString(VARIANCE));
 	
 	private JPanel content = new JPanel();
 	public Accueil() {
@@ -46,13 +50,21 @@ public class Accueil {
 		fenetre.setLocationRelativeTo(null);
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		panEsperance.add(boutonPlus1Esperance, BorderLayout.EAST);
+		//panEsperance.add(boutonPlus1Esperance, BorderLayout.EAST);
 		panEsperance.add(boutonEsperance, BorderLayout.CENTER);
-		panEsperance.add(boutonMoins1Esperance, BorderLayout.WEST);
+		//panEsperance.add(boutonMoins1Esperance, BorderLayout.WEST);
 		
-		panVariance.add(boutonPlus1Variance, BorderLayout.EAST);
+		zone_text_Esperance.setPreferredSize(new Dimension(150, 30));
+		panEsperance.add(zone_text_Esperance);
+		
+		//panVariance.add(boutonPlus1Variance, BorderLayout.EAST);
 		panVariance.add(boutonVariance, BorderLayout.CENTER);
-		panVariance.add(boutonMoins1Variance, BorderLayout.WEST);
+		//panVariance.add(boutonMoins1Variance, BorderLayout.WEST);
+		
+		zone_text_Variance.setPreferredSize(new Dimension(150, 30));
+		panVariance.add(zone_text_Variance);
+		
+		
 		
 		panMonstre.add(boutonMonstre);
 		
@@ -72,6 +84,7 @@ public class Accueil {
 		
 		boutonEsperance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+				esperance = Integer.parseInt(zone_text_Esperance.getText());
 				card.show(content, "Variance");
 			}
 		});
@@ -92,6 +105,7 @@ public class Accueil {
 		
 		boutonVariance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+				variance = Integer.parseInt(zone_text_Variance.getText());
 				int[] esperances = {esperance,esperance,esperance,esperance,esperance,esperance};
 				int[] variances = {variance,variance,variance,variance,variance,variance};
 				mob = Monstre.creerMonstreAleaNorm(esperances,variances);
@@ -108,8 +122,11 @@ public class Accueil {
 				esperance = ESPERANCE;
 				variance = VARIANCE;
 				
-				boutonEsperance.setText("Esperance :" + esperance);
-				boutonVariance.setText("Variance :" + variance);
+				boutonEsperance.setText("Esperance :");// + esperance);
+				boutonVariance.setText("Variance :");// + variance);
+				zone_text_Esperance.setText(Integer.toString(ESPERANCE));
+				zone_text_Variance.setText(Integer.toString(VARIANCE));
+				
 				card.show(content, "Esperance");
 			}
 		});
