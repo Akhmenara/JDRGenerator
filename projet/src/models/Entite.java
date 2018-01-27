@@ -66,11 +66,11 @@ abstract class Entite {
 	}
 	
 	private int verif(int x) {
-		if (x > 3) {
+		if (x > 1) {
 			return x;
 			
 		}else {
-			return 3;
+			return 1;
 		}
 	}
 }

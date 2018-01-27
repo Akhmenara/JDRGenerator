@@ -76,4 +76,75 @@ public class Database {
 
 		return list;
 	}
+	
+	/**
+	 * Ask database to get one monster by his id
+	 * @return A Monstre object
+	 */
+	public static Monstre getMonsterById(int id){
+		Monstre monstre = null;
+
+		try {
+			Statement statement = (Statement) dbConnection.createStatement();
+			ResultSet result = statement.executeQuery("SELECT * FROM Monstres WHERE id_monstre = '" + id + "'");
+			
+			// Browse all results of the query
+			while(result.next()){
+				// Name of the monster
+				String nom = result.getString("nom_monstre");
+				
+				// Stats of the monster
+				int[] stats = {result.getInt("for_monstre"), result.getInt("dex_monstre"), result.getInt("con_monstre"), 
+						result.getInt("int_monstre"), result.getInt("sag_monstre"), result.getInt("cha_monstre")};
+				
+				// Var needed to be store in model
+				// String size = result.getString("size");
+				
+				// Add new object Monstre to the list to be returned
+				monstre = new Monstre(nom, stats);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return monstre;
+	}
+	/**
+	 * Ask database to get one monster by his name
+	 * @return A Monstre object
+	 */
+	public static Monstre getMonsterByName(String nom){
+		Monstre monstre = null;
+		if(nom.contains("'")){
+			nom.replace("'", " ");
+		}
+		try {
+			Statement statement = (Statement) dbConnection.createStatement();
+			ResultSet result = statement.executeQuery("SELECT * FROM Monstres WHERE nom_monstre = '" + nom + "'");
+			
+			// Browse all results of the query
+			while(result.next()){
+				// Name of the monster
+				String nomRet = result.getString("nom_monstre");
+				
+				// Stats of the monster
+				int[] stats = {result.getInt("for_monstre"), result.getInt("dex_monstre"), result.getInt("con_monstre"), 
+						result.getInt("int_monstre"), result.getInt("sag_monstre"), result.getInt("cha_monstre")};
+				
+				// Var needed to be store in model
+				// String size = result.getString("size");
+				
+				// Add new object Monstre to the list to be returned
+				monstre = new Monstre(nomRet, stats);
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return monstre;
+	}
 }
