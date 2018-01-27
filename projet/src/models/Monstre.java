@@ -60,9 +60,17 @@ public class Monstre extends Entite{
 		super.setCharisme(charisme);
 	}
 	
+	public String getNom() {
+		return super.getNom();
+	}
+	
+	public void setNom(String nom) {
+		super.setNom(nom);
+	}
+	
 	public static Monstre creerMonstreAleaNorm(int[] moyennes, int[] variances) {
 		int[] stats = new int[6];
-		for (int i = 0; i<6; stats[i] = RandomStat.randn(moyennes[i],variances[i++])) {}
+		for (int i = 0; i<6; stats[i] = RandomStat.randn(moyennes[i],variances[i++]));
 		return new Monstre(stats);
 	}
 	
@@ -81,7 +89,7 @@ public class Monstre extends Entite{
 	public String toString() {
 		return "Monstre [Force = " + getForce() + ", Dexterite = " + getDexterite() + ", Constitution = "
 				+ getConstitution() + ", Intelligence = " + getIntelligence() + ", Sagesse = " + getSagesse()
-				+ ", Charisme = " + getCharisme() + "]";
+				+ ", Charisme = " + getCharisme() + ", Nom = " + getNom() + "]";
 	}
 	
 	
