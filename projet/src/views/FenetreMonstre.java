@@ -33,7 +33,7 @@ public class FenetreMonstre extends JFrame{
 		labelStats[5].setText("Cha : " + Integer.toString(monstre.getCharisme()));
 		for (int i = 0; i<6; labelStats[i++].setLocation(100,100*i));
 		labelNom.setLocation(100, 100);
-		panMonstre.add(labelNom);
+		panMonstre.add(labelNom, BorderLayout.WEST);
 		for (int i = 0; i<6;panMonstre.add(labelStats[i++],BorderLayout.WEST));
 		this.setContentPane(panMonstre);
 		this.setVisible(true);

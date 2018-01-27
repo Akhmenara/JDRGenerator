@@ -3,8 +3,6 @@ package tools;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import com.mysql.jdbc.Statement;
-
 public class TestDBConnection {
 
 	public static void main(String[] args) {

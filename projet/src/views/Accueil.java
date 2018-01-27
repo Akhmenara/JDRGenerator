@@ -5,8 +5,6 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -44,7 +42,7 @@ public class Accueil {
 	
 	private JPanel panVariance = new JPanel();
 	
-	private JLabel labelNbrMontre = new JLabel("Nombre : ");
+	private JLabel labelNbrMonstre = new JLabel("Nombre : ");
 	private JTextField zone_text_Esperance = new JTextField(Integer.toString(ESPERANCE));
 	
 	private JTextField zone_text_Variance = new JTextField(Integer.toString(VARIANCE));
@@ -65,6 +63,7 @@ public class Accueil {
 		
 		for (int i = 0; i<NBR_MONSTRE; choixMonstre.addItem(MONSTRES.get(i++).getNom()));
 		panEsperance.add(choixMonstre);
+		panEsperance.add(labelNbrMonstre);
 		panEsperance.add(zone_text_Esperance);
 		zone_text_Esperance.setPreferredSize(new Dimension(150, 30));
 		
