@@ -94,6 +94,22 @@ public class Monstre extends Entite{
 		}
 		return mobs;
 	}
+	
+	public static Monstre creerMonstreAleaNorm(String nom, int[] moyennes, int[] variances) {
+		int[] stats = new int[6];
+		for (int i = 0; i<6; stats[i] = RandomStat.randn(moyennes[i],variances[i++])) {}
+		return new Monstre(nom,stats);
+	}
+	
+	public static Monstre[] creerMonstreAleaNorm(String nom, int[] moyennes, int[] variances, int nombre) {
+		Monstre[] mobs = new Monstre[nombre];
+		for (int i = 0; i < nombre; i++) {
+			int[] stats = new int[6];
+			for (int j = 0; j < 6; stats[j] = RandomStat.randn(moyennes[j],variances[j++])) {}
+			mobs[i] = new Monstre(nom + i,stats);
+		}
+		return mobs;
+	}
 
 	@Override
 	public String toString() {

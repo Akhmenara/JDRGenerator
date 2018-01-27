@@ -33,7 +33,7 @@ public class Database {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Trying to connect...");
-			this.dbConnection = DriverManager.getConnection(url, "root", "");			
+			dbConnection = DriverManager.getConnection(url, "root", "");			
 			System.out.println("Connection Established Successfull");						
 		} catch (Exception e) {
 			// The connection failed

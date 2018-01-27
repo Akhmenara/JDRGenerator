@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -27,7 +28,9 @@ public class Accueil {
 	private JButton boutonMoins1Esperance = new JButton("-1");
 	
 	private int esperance = ESPERANCE;
-	private JButton boutonEsperance = new JButton("Esperance :" );//+ esperance);
+	private JButton boutonEsperance = new JButton("Monstre :" );
+	
+	private JComboBox<String> choixMonstre = new JComboBox<String>();
 	
 	private JPanel panEsperance = new JPanel();
 	
@@ -46,7 +49,7 @@ public class Accueil {
 	
 	private JPanel content = new JPanel();
 	private static ArrayList<Monstre> monstres = Database.getAllMonsters();
-	private int nbrMonstre = 0;
+	private int nbrMonstre = monstres.size();
 	public Accueil() {
 		fenetre.setSize(1280,720);
 		fenetre.setLocationRelativeTo(null);
@@ -56,8 +59,11 @@ public class Accueil {
 		panEsperance.add(boutonEsperance, BorderLayout.CENTER);
 		//panEsperance.add(boutonMoins1Esperance, BorderLayout.WEST);
 		
-		zone_text_Esperance.setPreferredSize(new Dimension(150, 30));
-		panEsperance.add(zone_text_Esperance);
+		//zone_text_Esperance.setPreferredSize(new Dimension(150, 30));
+		//panEsperance.add(zone_text_Esperance);
+		
+		for (int i = 0; i<nbrMonstre; choixMonstre.addItem(monstres.get(i++).getNom()))
+		panEsperance.add(choixMonstre);
 		
 		//panVariance.add(boutonPlus1Variance, BorderLayout.EAST);
 		panVariance.add(boutonVariance, BorderLayout.CENTER);
@@ -65,6 +71,7 @@ public class Accueil {
 		
 		zone_text_Variance.setPreferredSize(new Dimension(150, 30));
 		panVariance.add(zone_text_Variance);
+		
 		
 		
 		boutonPlus1Esperance.addActionListener(new ActionListener() {
@@ -105,16 +112,16 @@ public class Accueil {
 		boutonVariance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				variance = Integer.parseInt(zone_text_Variance.getText());
-				int[] esperances = {monstres.get(nbrMonstre).getForce(),
-						monstres.get(nbrMonstre).getDexterite(),
-						monstres.get(nbrMonstre).getConstitution(),
-						monstres.get(nbrMonstre).getIntelligence(),
-						monstres.get(nbrMonstre).getSagesse(),
-						monstres.get(nbrMonstre).getCharisme()};
+				Monstre monstreBase = monstres.get(nbrMonstre);
+				int[] esperances = {monstreBase.getForce(),
+						monstreBase.getDexterite(),
+						monstreBase.getConstitution(),
+						monstreBase.getIntelligence(),
+						monstreBase.getSagesse(),
+						monstreBase.getCharisme()};
 				int[] variances = {variance,variance,variance,variance,variance,variance};
-				Monstre mob = Monstre.creerMonstreAleaNorm(esperances,variances);
+				Monstre mob = Monstre.creerMonstreAleaNorm(monstreBase.getNom(),esperances,variances);
 				nbrMonstre++;
-				mob.setNom("test" + nbrMonstre);
 				FenetreMonstre fenetreMob = new FenetreMonstre(mob);
 				
 				esperance = ESPERANCE;

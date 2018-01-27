@@ -12,6 +12,7 @@ public class RunApp {
 		db = new Database();
 		
 		Accueil test = new Accueil();
+		System.out.println("Accueil fait");
 		test.afficher();
 
 	}
