@@ -1,10 +1,15 @@
 package controllers;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.mysql.jdbc.Statement;
 
@@ -18,22 +23,56 @@ public class Database {
 
 		//----------------------------------------------
 		// Connection to database at the object creation
-		this.DBConnection();
+		this.DBConnection(this.getLogin());
 		//----------------------------------------------
+	}
+	
+	/**
+	 * Extract url, login and password from a external file
+	 * @return A HashMap containing the connection informations
+	 */
+	private HashMap<String, String> getLogin(){
+		HashMap<String, String> logins = new HashMap<String, String>();
+
+		System.out.println(new File(".").getAbsoluteFile());
+		
+		BufferedReader br = null;
+		String line;
+		String[] splitResult = new String[2];
+		try{
+			br = new BufferedReader(new FileReader("./projet/src/tools/logintodb.jdrg"));
+			while ((line = br.readLine()) != null) {
+				splitResult = line.split("=", 2);
+				logins.put(splitResult[0], splitResult[1]);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		
+		return logins;
 	}
 	
 	/**
 	 * Connect to the database
 	 */
-	private void DBConnection(){
+	private void DBConnection(HashMap<String, String> logins){
 		
 		// jdbc:mysql://<url>:<port>/<db_name>?useSSL=false
-		String url = "jdbc:mysql://localhost:3306/jdrgenerator?useSSL=false";
+		String url = logins.get("url");
+		String login = logins.get("login");
+		String password = logins.get("password");
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Trying to connect...");
-			dbConnection = DriverManager.getConnection(url, "root", "");			
+			dbConnection = DriverManager.getConnection(url, login, password);			
 			System.out.println("Connection Established Successfull");						
 		} catch (Exception e) {
 			// The connection failed
