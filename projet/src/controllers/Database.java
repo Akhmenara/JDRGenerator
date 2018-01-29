@@ -14,6 +14,7 @@ import java.util.HashMap;
 import com.mysql.jdbc.Statement;
 
 import models.Monstre;
+import models.Paths;
 
 public class Database {
 
@@ -40,7 +41,7 @@ public class Database {
 		String line;
 		String[] splitResult = new String[2];
 		try{
-			br = new BufferedReader(new FileReader("./projet/src/tools/logintodb.jdrg"));
+			br = new BufferedReader(new FileReader(Paths.externalFiles + "logintodb.jdrg"));
 			while ((line = br.readLine()) != null) {
 				splitResult = line.split("=", 2);
 				logins.put(splitResult[0], splitResult[1]);

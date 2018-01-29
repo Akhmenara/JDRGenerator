@@ -7,7 +7,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.HashMap;
  
+import models.Paths;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,14 +23,38 @@ import com.mysql.jdbc.Statement;
  */
 public class ImportMonstres {
 	public static void main(String[] args) throws FileNotFoundException, JSONException {
+		
+		HashMap<String, String> logins = new HashMap<String, String>();
+		
+		BufferedReader brLogins = null;
+		String lineLogins;
+		String[] splitResultLogins = new String[2];
+		try{
+			brLogins = new BufferedReader(new FileReader(Paths.externalFiles + "logintodb.jdrg"));
+			while ((lineLogins = brLogins.readLine()) != null) {
+				splitResultLogins = lineLogins.split("=", 2);
+				logins.put(splitResultLogins[0], splitResultLogins[1]);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			try {
+				if (brLogins != null)
+					brLogins.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	
 		String jsonData = "";
 		BufferedReader br = null;
-		String url = "jdbc:mysql://localhost:3306/jdrgenerator?useSSL=false";
-		System.out.println(new File(".").getAbsoluteFile());
+		String url = logins.get("url");
+		String login = logins.get("login");
+		String password = logins.get("password");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Trying to connect...");
-			Connection connection = DriverManager.getConnection(url, "root", "");
+			Connection connection = DriverManager.getConnection(url, login, password);
 			System.out.println("Connection established successfull");
 					
 			//---------------------------------------
@@ -43,7 +70,7 @@ public class ImportMonstres {
 			long debut = System.currentTimeMillis();
 			String line;
 			int nbLines = 0;
-			br = new BufferedReader(new FileReader("./src/tools/Monstres.json"));
+			br = new BufferedReader(new FileReader(Paths.externalFiles + "Monstres.json"));
 			while ((line = br.readLine()) != null) {
 				jsonData += line + "\n";
 				nbLines++;
