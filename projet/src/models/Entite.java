@@ -8,7 +8,9 @@ abstract class Entite {
 	private int sagesse;
 	private int charisme;
 	private String nom;
-	
+	private int vieMax;
+	private int vie;
+
 	protected int getForce() {
 		return force;
 	}
@@ -63,6 +65,22 @@ abstract class Entite {
 	
 	protected void setNom(String nom) {
 		this.nom = nom;
+	}
+	
+	protected int getVieMax() {
+		return vieMax;
+	}
+
+	protected void setVieMax(int vieMax) {
+		this.vieMax = vieMax;
+	}
+	
+	protected int getVie() {
+		return vie;
+	}
+
+	protected void setVie(int vie) {
+		this.vie = vie;
 	}
 	
 	private int verif(int x) {

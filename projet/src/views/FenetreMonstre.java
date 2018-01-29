@@ -31,10 +31,10 @@ public class FenetreMonstre extends JFrame{
 		labelStats[3].setText("Int : " + Integer.toString(monstre.getIntelligence()));
 		labelStats[4].setText("Sag : " + Integer.toString(monstre.getSagesse()));
 		labelStats[5].setText("Cha : " + Integer.toString(monstre.getCharisme()));
-		for (int i = 0; i<6; labelStats[i++].setLocation(100,100*i));
-		labelNom.setLocation(100, 100);
-		panMonstre.add(labelNom, BorderLayout.WEST);
-		for (int i = 0; i<6;panMonstre.add(labelStats[i++],BorderLayout.WEST));
+		for (int i = 0; i<6; labelStats[i++].setLocation(10,10*(i+1)));
+		labelNom.setLocation(10, 10);
+		panMonstre.add(labelNom);
+		for (int i = 0; i<6;panMonstre.add(labelStats[i++]));
 		this.setContentPane(panMonstre);
 		this.setVisible(true);
 	}

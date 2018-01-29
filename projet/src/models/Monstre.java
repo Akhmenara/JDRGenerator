@@ -2,16 +2,20 @@ package models;
 
 public class Monstre extends Entite{
 	
-	public Monstre(String nom, int[] stats) {
-		this.setForce(stats[0]);
-		this.setDexterite(stats[1]);
-		this.setConstitution(stats[2]);
-		this.setIntelligence(stats[3]);
-		this.setSagesse(stats[4]);
-		this.setCharisme(stats[5]);
-		this.setNom(nom);
+	private De desVie;
+	
+	public Monstre(String nom, int[] stats, De desVie) {
+		this(nom,stats);
+		this.setDesVie(desVie);
+		this.setVieMax((int) ((1+desVie.getNombre()*desVie.getValeur())/2));
+		this.setVie(getVieMax());
 	}
 	
+	public Monstre(String nom, int[] stats) {
+		this(stats);
+		this.setNom(nom);
+	}
+
 	public Monstre(int[] stats) {
 		this.setForce(stats[0]);
 		this.setDexterite(stats[1]);
@@ -20,6 +24,9 @@ public class Monstre extends Entite{
 		this.setSagesse(stats[4]);
 		this.setCharisme(stats[5]);
 		this.setNom("Default");
+		this.setDesVie(new De("1d1"));
+		this.setVieMax(1);
+		this.setVie(getVieMax());
 	}
 	
 	
@@ -79,6 +86,30 @@ public class Monstre extends Entite{
 		super.setNom(nom);
 	}
 	
+	protected int getVieMax() {
+		return super.getVieMax();
+	}
+
+	protected void setVieMax(int vieMax) {
+		super.setVieMax(vieMax);
+	}
+	
+	protected int getVie() {
+		return super.getVie();
+	}
+
+	protected void setVie(int vie) {
+		super.setVie(vie);
+	}
+	
+	public De getDesVie() {
+		return desVie;
+	}
+
+	public void setDesVie(De desVie) {
+		this.desVie = desVie;
+	}
+
 	public static Monstre creerMonstreAleaNorm(int[] moyennes, int[] variances) {
 		int[] stats = new int[6];
 		for (int i = 0; i<6; stats[i] = RandomStat.randn(moyennes[i],variances[i++])) {}
