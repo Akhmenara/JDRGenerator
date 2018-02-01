@@ -118,11 +118,7 @@ public class Monstre extends Entite{
 	
 	public static Monstre[] creerMonstreAleaNorm(int[] moyennes, int[] variances, int nombre) {
 		Monstre[] mobs = new Monstre[nombre];
-		for (int i = 0; i < nombre; i++) {
-			int[] stats = new int[6];
-			for (int j = 0; j < 6; stats[j] = RandomStat.randn(moyennes[j],variances[j++])) {}
-			mobs[i] = new Monstre(stats);
-		}
+		for (int i = 0; i < nombre; mobs[i] = creerMonstreAleaNorm(moyennes, variances)) {}
 		return mobs;
 	}
 	
@@ -134,11 +130,7 @@ public class Monstre extends Entite{
 	
 	public static Monstre[] creerMonstreAleaNorm(String nom, int[] moyennes, int[] variances, int nombre) {
 		Monstre[] mobs = new Monstre[nombre];
-		for (int i = 0; i < nombre; i++) {
-			int[] stats = new int[6];
-			for (int j = 0; j < 6; stats[j] = RandomStat.randn(moyennes[j],variances[j++])) {}
-			mobs[i] = new Monstre(nom +" "+ (i +1),stats);
-		}
+		for (int i = 0; i < nombre; mobs[i] = creerMonstreAleaNorm(nom + " "+(++i),moyennes, variances)) {}
 		return mobs;
 	}
 
