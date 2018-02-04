@@ -1,121 +1,111 @@
 package views;
+
+
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import javax.swing.JButton;
+import java.awt.Color;
+import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import java.awt.BorderLayout;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+
+
+import controllers.Database;
+import models.Monstre;
+
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import models.Monstre;
 
-import java.awt.CardLayout;
-import java.awt.Dimension;
-import controllers.Database;
-public class Accueil {
-	private final int ESPERANCE = 1;
+public class Accueil extends JFrame {
+
 	private final int VARIANCE = 4;
-	private CardLayout card = new CardLayout();
 	
-	private JFrame fenetre = new JFrame("Accueil");
-	
-	private JButton boutonPlus1Esperance = new JButton("+1");
-	private JButton boutonMoins1Esperance = new JButton("-1");
-	
-	private int esperance = ESPERANCE;
-	private JButton boutonEsperance = new JButton("Monstre :" );
-	
-	private JComboBox<String> choixMonstre = new JComboBox<String>();
-	
-	private JPanel panEsperance = new JPanel();
-	
-	private JButton boutonPlus1Variance = new JButton("+1");
-	private JButton boutonMoins1Variance = new JButton("-1");
-	
+	private JPanel contentPane;
 	private int variance = VARIANCE;
-	private JButton boutonVariance = new JButton("Variance :" );//+ variance);
-	
-	private JPanel panVariance = new JPanel();
-	
-	private JLabel labelNbrMonstre = new JLabel("Nombre : ");
-	private JTextField zone_text_Esperance = new JTextField(Integer.toString(ESPERANCE));
-	
-	private JTextField zone_text_Variance = new JTextField(Integer.toString(VARIANCE));
-	
-	private JPanel content = new JPanel();
+	private static Database db = new Database();
 	private static ArrayList<Monstre> MONSTRES = Database.getAllMonsters();
 	private static int NBR_MONSTRE = MONSTRES.size();
+	
+	/**
+	 * Create the frame.
+	 */
 	public Accueil() {
-		fenetre.setSize(1280,720);
-		fenetre.setLocationRelativeTo(null);
-		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		fenetre.setLayout(new BorderLayout());
-		//panEsperance.add(boutonPlus1Esperance, BorderLayout.EAST);
-		panEsperance.add(boutonEsperance, BorderLayout.CENTER);
-		//panEsperance.add(boutonMoins1Esperance, BorderLayout.WEST);
+		setResizable(false);
+		setTitle("Cr\u00E9ation de monstre");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setForeground(Color.DARK_GRAY);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
+		JRadioButton rdbtnAleatoire = new JRadioButton("Al\u00E9atoire");
+		rdbtnAleatoire.setSelected(true);
+		rdbtnAleatoire.setBounds(36, 95, 85, 25);
+		contentPane.add(rdbtnAleatoire);
 		
-		
+		JComboBox<String> choixMonstre = new JComboBox<String>();
+		choixMonstre.setBounds(45, 41, 139, 22);
 		for (int i = 0; i<NBR_MONSTRE; choixMonstre.addItem(MONSTRES.get(i++).getNom()));
-		panEsperance.add(choixMonstre);
-		panEsperance.add(labelNbrMonstre);
-		panEsperance.add(zone_text_Esperance);
-		zone_text_Esperance.setPreferredSize(new Dimension(150, 30));
+		contentPane.add(choixMonstre);
 		
-		//panVariance.add(boutonPlus1Variance, BorderLayout.EAST);
-		panVariance.add(boutonVariance, BorderLayout.CENTER);
-		//panVariance.add(boutonMoins1Variance, BorderLayout.WEST);
+		JLabel labelChoixMonstre = new JLabel("Choix du monstre");
+		labelChoixMonstre.setBounds(45, 12, 139, 16);
+		contentPane.add(labelChoixMonstre);
 		
-		zone_text_Variance.setPreferredSize(new Dimension(150, 30));
-		panVariance.add(zone_text_Variance);
+		JLabel labelNombre = new JLabel("Nombre");
+		labelNombre.setBounds(294, 12, 56, 16);
+		contentPane.add(labelNombre);
 		
+		JSpinner choixNombre = new JSpinner();
+		choixNombre.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		choixNombre.setBounds(277, 41, 117, 22);
+		contentPane.add(choixNombre);
 		
+		JPanel panEcartType = new JPanel();
+		panEcartType.setToolTipText("");
+		panEcartType.setBounds(12, 129, 139, 101);
+		contentPane.add(panEcartType);
+		panEcartType.setLayout(null);
 		
-		boutonPlus1Esperance.addActionListener(new ActionListener() {
+		JLabel labelEcartType = new JLabel("Ecart type");
+		labelEcartType.setBounds(46, 8, 57, 16);
+		panEcartType.add(labelEcartType);
+		
+		JSpinner choixEcartType = new JSpinner();
+		choixEcartType.setModel(new SpinnerNumberModel(new Integer(2), new Integer(0), null, new Integer(1)));
+		choixEcartType.setBounds(31, 37, 72, 22);
+		
+		panEcartType.add(choixEcartType);
+		panEcartType.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{choixEcartType}));
+		
+		JButton boutonCreer = new JButton("Cr\u00E9er");
+		boutonCreer.setBounds(320, 191, 100, 51);
+		boutonCreer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				esperance++;
-				boutonEsperance.setText("Esperance :" + esperance);
-			}
-		});
-		
-		boutonMoins1Esperance.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				esperance--;
-				boutonEsperance.setText("Esperance :" + esperance);
-			}
-		});
-		
-		boutonEsperance.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				esperance = Integer.parseInt(zone_text_Esperance.getText());
-				card.show(content, "Variance");
-			}
-		});
-		
-		boutonPlus1Variance.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				variance++;
-				boutonVariance.setText("Variance :" + variance);
-			}
-		});
-		
-		boutonMoins1Variance.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				variance--;
-				boutonVariance.setText("Variance :" + variance);
-			}
-		});
-		
-		boutonVariance.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				variance = Integer.parseInt(zone_text_Variance.getText());
+				
+				if (panEcartType.isVisible()) {
+					variance = (int) Math.pow((int) choixEcartType.getValue(),2);
+				}else {
+					variance = 0;
+				}
+				
 				Monstre monstreBase = MONSTRES.get(choixMonstre.getSelectedIndex());
-				int nbrMonstre = Integer.parseInt(zone_text_Esperance.getText());
+				int nbrMonstre = (int) choixNombre.getValue();
 				int[] esperances = {monstreBase.getForce(),
 						monstreBase.getDexterite(),
 						monstreBase.getConstitution(),
@@ -126,28 +116,16 @@ public class Accueil {
 				Monstre[] mobs = Monstre.creerMonstreAleaNorm(monstreBase.getNom(),esperances,variances,nbrMonstre);
 				FenetreMonstre[] fenetresMob = new FenetreMonstre[mobs.length];
 				for (int k = 0 ; k < mobs.length; fenetresMob[k] = new FenetreMonstre(mobs[k++]));
-				
-				esperance = ESPERANCE;
-				variance = VARIANCE;
-				
-				zone_text_Esperance.setText(Integer.toString(ESPERANCE));
-				zone_text_Variance.setText(Integer.toString(VARIANCE));
-				card.show(content, "Esperance");
-				
 			}
 		});
 		
-		content.setLayout(card);
-		
-		content.add(panEsperance,"Esperance");
-		content.add(panVariance,"Variance");
-		
-		fenetre.setContentPane(content);
+		contentPane.add(boutonCreer);
+		rdbtnAleatoire.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				//panEcartType.setEnabled(!panEcartType.isEnabled());
+				panEcartType.setVisible(!panEcartType.isVisible());
+				variance = 0;
+			}
+		});
 	}
-	public void afficher() {
-		fenetre.setVisible(true);
-	}
-	
-
-	
 }

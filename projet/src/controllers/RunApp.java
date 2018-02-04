@@ -13,7 +13,7 @@ public class RunApp {
 		
 		Accueil test = new Accueil();
 		System.out.println("Accueil fait");
-		test.afficher();
+		test.setVisible(true);
 
 	}
 
