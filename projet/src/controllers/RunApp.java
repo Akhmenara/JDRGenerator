@@ -4,12 +4,10 @@ import views.Accueil;
 
 public class RunApp {
 
-	public static Database db;
 	public static void main(String[] args) {
-
 		
 		// Initialize the connection to the database
-		db = new Database();
+		Database.createDatabase();
 		
 		Accueil test = new Accueil();
 		System.out.println("Accueil fait");

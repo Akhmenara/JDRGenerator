@@ -21,10 +21,13 @@ public class Database {
 	private static Connection dbConnection;
 	
 	public Database(){
+	}
+	
+	public static void createDatabase(){
 
 		//----------------------------------------------
 		// Connection to database at the object creation
-		this.DBConnection(this.getLogin());
+		Database.DBConnection(Database.getLogin());
 		//----------------------------------------------
 	}
 	
@@ -32,7 +35,7 @@ public class Database {
 	 * Extract url, login and password from a external file
 	 * @return A HashMap containing the connection informations
 	 */
-	private HashMap<String, String> getLogin(){
+	private static HashMap<String, String> getLogin(){
 		HashMap<String, String> logins = new HashMap<String, String>();
 
 		System.out.println(new File(".").getAbsoluteFile());
@@ -63,7 +66,7 @@ public class Database {
 	/**
 	 * Connect to the database
 	 */
-	private void DBConnection(HashMap<String, String> logins){
+	private static void DBConnection(HashMap<String, String> logins){
 		
 		// jdbc:mysql://<url>:<port>/<db_name>?useSSL=false
 		String url = logins.get("url");
