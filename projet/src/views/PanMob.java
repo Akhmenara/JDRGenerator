@@ -29,7 +29,7 @@ public class PanMob extends JPanel {
 	 * Create the panel.
 	 * @param monstre 
 	 */
-	public PanMob(Monstre monstre) {
+	public PanMob(final Monstre monstre) {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(null);
 		
