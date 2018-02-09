@@ -31,6 +31,11 @@ import java.util.ArrayList;
 
 public class Accueil extends JFrame {
 
+	/**
+	 * Fenetre d'accueil.
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final int VARIANCE = 4;
 	
 	private JPanel contentPane;
@@ -114,8 +119,10 @@ public class Accueil extends JFrame {
 						monstreBase.getCharisme()};
 				int[] variances = {variance,variance,variance,variance,variance,variance};
 				Monstre[] mobs = Monstre.creerMonstreAleaNorm(monstreBase.getNom(),esperances,variances,nbrMonstre);
-				FenetreMonstre[] fenetresMob = new FenetreMonstre[mobs.length];
-				for (int k = 0 ; k < mobs.length; fenetresMob[k] = new FenetreMonstre(mobs[k++]));
+				//FenetreMonstre[] fenetresMob = new FenetreMonstre[mobs.length];
+				//for (int k = 0 ; k < mobs.length; fenetresMob[k] = new FenetreMonstre(mobs[k++]));
+				FenetreMonstre fenetresMob = new FenetreMonstre(mobs);
+				fenetresMob.setVisible(true);
 			}
 		});
 		

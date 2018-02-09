@@ -86,19 +86,19 @@ public class Monstre extends Entite{
 		super.setNom(nom);
 	}
 	
-	protected int getVieMax() {
+	public int getVieMax() {
 		return super.getVieMax();
 	}
 
-	protected void setVieMax(int vieMax) {
+	public void setVieMax(int vieMax) {
 		super.setVieMax(vieMax);
 	}
 	
-	protected int getVie() {
+	public int getVie() {
 		return super.getVie();
 	}
 
-	protected void setVie(int vie) {
+	public void setVie(int vie) {
 		super.setVie(vie);
 	}
 	
