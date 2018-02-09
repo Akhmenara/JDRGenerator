@@ -2,7 +2,6 @@ package views;
 
 import java.awt.Dimension;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import models.Monstre;
@@ -53,5 +52,7 @@ public class PanneauMonstre extends JPanel {
 		nombreMonstre++;
 		add(pan);
 	}
-	
+	public int getNombreMonstre() {
+		return nombreMonstre;
+	}
 }

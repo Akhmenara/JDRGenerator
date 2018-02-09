@@ -15,11 +15,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import java.awt.Font;
 import java.awt.Insets;
 
 public class PanMob extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2931688819744574549L;
 	private JTable table;
 	public static final int width = 300;
 	public static final int height = 100;

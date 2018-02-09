@@ -40,7 +40,6 @@ public class Accueil extends JFrame {
 	
 	private JPanel contentPane;
 	private int variance = VARIANCE;
-	private static Database db = new Database();
 	private static ArrayList<Monstre> MONSTRES = Database.getAllMonsters();
 	private static int NBR_MONSTRE = MONSTRES.size();
 	

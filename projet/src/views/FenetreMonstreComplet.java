@@ -6,7 +6,6 @@ import javax.swing.border.EmptyBorder;
 
 import models.Monstre;
 import javax.swing.JTextPane;
-import javax.swing.JButton;
 
 public class FenetreMonstreComplet extends JFrame {
 
