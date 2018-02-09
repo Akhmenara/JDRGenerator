@@ -14,7 +14,7 @@ public class De {
 		String[] parametres = str.split("d");
 		setNombre(Integer.parseInt(parametres[0]));
 		setValeur(Integer.parseInt(parametres[1]));
-		this.resultat = 0;
+		this.resultat = (int) ((1+this.getNombre()*this.getValeur())/2);
 		
 	}
 	public int getNombre() {
@@ -57,11 +57,18 @@ public class De {
 	 * Lance le dés et change la valeur du résultat.
 	 */
 	public void lancer() {
-		resultat = 0;
+		int resultat = 0;
 		Random alea = new Random();
 		for(int i = 0; i<getNombre(); i++) {
 			resultat += alea.nextInt(valeur)+1;
 		}
 		this.setResultat(resultat);
+	}
+	public De clone() {
+		return new De(this.nombre+"d"+this.resultat);
+	}
+	
+	public String toString() {
+		return getNombre() + "d"+getValeur() + " =  " + getResultat();
 	}
 }
