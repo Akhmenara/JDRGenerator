@@ -65,6 +65,8 @@ public class ImportMonstres {
 			primaryKey.executeUpdate("ALTER TABLE `Monstres` ADD PRIMARY KEY (`id_monstre`);");
 			Statement autoInc = (Statement) connection.createStatement();
 			autoInc.executeUpdate("ALTER TABLE `Monstres` MODIFY `id_monstre` int(11) NOT NULL AUTO_INCREMENT;");
+			Statement addHP = (Statement) connection.createStatement();
+			addHP.executeUpdate("ALTER TABLE `monstres` ADD `hp_monstre` VARCHAR(255) NULL DEFAULT NULL AFTER `cha_monstre`;");
 			//---------------------------------------			
 			
 			long debut = System.currentTimeMillis();
@@ -92,6 +94,7 @@ public class ImportMonstres {
 			 *   "intelligence": 10,
 			 *   "wisdom": 8,
 			 *   "charisma": 8
+			 *   "hit_dice": "2d6"
 			 * }
 	         */
 			int nbInsert = 0;
@@ -109,8 +112,9 @@ public class ImportMonstres {
 				int intel = obj.getInt("intelligence");
 				int wis = obj.getInt("wisdom");
 				int cha = obj.getInt("charisma");
+				String hp = obj.getString("hit_dice");
 				
-				insertInto.executeUpdate("INSERT INTO `monstres` (`id_monstre`, `nom_monstre`, `taille_monstre`, `for_monstre`, `dex_monstre`, `con_monstre`, `int_monstre`, `sag_monstre`, `cha_monstre`) VALUES (NULL, '" + name + "', '" + size + "', " + str + ", " + dex + ", " + con + ", " + intel + ", " + wis + ", " + cha + ");");
+				insertInto.executeUpdate("INSERT INTO `monstres` (`id_monstre`, `nom_monstre`, `taille_monstre`, `for_monstre`, `dex_monstre`, `con_monstre`, `int_monstre`, `sag_monstre`, `cha_monstre`, `hp_monstre`) VALUES (NULL, '" + name + "', '" + size + "', " + str + ", " + dex + ", " + con + ", " + intel + ", " + wis + ", " + cha + ", '" + hp + "');");
 				nbInsert++;
 			}
 			

@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import com.mysql.jdbc.Statement;
 
+import models.De;
 import models.Monstre;
 import models.Paths;
 
@@ -109,7 +110,7 @@ public class Database {
 				// String size = result.getString("size");
 				
 				// Add new object Monstre to the list to be returned
-				list.add(new Monstre(nom, stats));
+				list.add(new Monstre(nom, stats, new De(result.getString("hp_monstre"))));
 			}
 			
 		} catch (SQLException e) {
@@ -144,7 +145,7 @@ public class Database {
 				// String size = result.getString("size");
 				
 				// Add new object Monstre to the list to be returned
-				monstre = new Monstre(nom, stats);
+				monstre = new Monstre(nom, stats, new De(result.getString("hp_monstre")));
 			}
 			
 		} catch (SQLException e) {
@@ -180,7 +181,7 @@ public class Database {
 				// String size = result.getString("size");
 				
 				// Add new object Monstre to the list to be returned
-				monstre = new Monstre(nomRet, stats);
+				monstre = new Monstre(nomRet, stats, new De(result.getString("hp_monstre")));
 			}
 			
 		} catch (SQLException e) {
