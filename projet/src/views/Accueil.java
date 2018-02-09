@@ -63,7 +63,7 @@ public class Accueil extends JFrame {
 		rdbtnAleatoire.setBounds(36, 95, 85, 25);
 		contentPane.add(rdbtnAleatoire);
 		
-		JComboBox<String> choixMonstre = new JComboBox<String>();
+		final JComboBox<String> choixMonstre = new JComboBox<String>();
 		choixMonstre.setBounds(45, 41, 139, 22);
 		for (int i = 0; i<NBR_MONSTRE; choixMonstre.addItem(MONSTRES.get(i++).getNom()));
 		contentPane.add(choixMonstre);
@@ -76,12 +76,12 @@ public class Accueil extends JFrame {
 		labelNombre.setBounds(294, 12, 56, 16);
 		contentPane.add(labelNombre);
 		
-		JSpinner choixNombre = new JSpinner();
+		final JSpinner choixNombre = new JSpinner();
 		choixNombre.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		choixNombre.setBounds(277, 41, 117, 22);
 		contentPane.add(choixNombre);
 		
-		JPanel panEcartType = new JPanel();
+		final JPanel panEcartType = new JPanel();
 		panEcartType.setToolTipText("");
 		panEcartType.setBounds(12, 129, 139, 101);
 		contentPane.add(panEcartType);
@@ -91,7 +91,7 @@ public class Accueil extends JFrame {
 		labelEcartType.setBounds(46, 8, 57, 16);
 		panEcartType.add(labelEcartType);
 		
-		JSpinner choixEcartType = new JSpinner();
+		final JSpinner choixEcartType = new JSpinner();
 		choixEcartType.setModel(new SpinnerNumberModel(new Integer(2), new Integer(0), null, new Integer(1)));
 		choixEcartType.setBounds(31, 37, 72, 22);
 		
