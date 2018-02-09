@@ -117,7 +117,7 @@ public class Accueil extends JFrame {
 						monstreBase.getSagesse(),
 						monstreBase.getCharisme()};
 				int[] variances = {variance,variance,variance,variance,variance,variance};
-				Monstre[] mobs = Monstre.creerMonstreAleaNorm(monstreBase.getNom(),esperances,variances,nbrMonstre);
+				Monstre[] mobs = Monstre.creerMonstreAleaNorm(monstreBase.getNom(),esperances,variances,monstreBase.getDesVie(),nbrMonstre);
 				//FenetreMonstre[] fenetresMob = new FenetreMonstre[mobs.length];
 				//for (int k = 0 ; k < mobs.length; fenetresMob[k] = new FenetreMonstre(mobs[k++]));
 				FenetreMonstre fenetresMob = new FenetreMonstre(mobs);

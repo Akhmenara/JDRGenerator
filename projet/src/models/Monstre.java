@@ -15,7 +15,12 @@ public class Monstre extends Entite{
 		this(stats);
 		this.setNom(nom);
 	}
-
+	
+	public Monstre(int[] stats, De deVie) {
+		this(stats);
+		this.setDesVie(deVie);
+	}
+	
 	public Monstre(int[] stats) {
 		this.setForce(stats[0]);
 		this.setDexterite(stats[1]);
@@ -110,39 +115,39 @@ public class Monstre extends Entite{
 		this.desVie = desVie;
 	}
 
-	public static Monstre creerMonstreAleaNorm(int[] moyennes, int[] variances) {
+	public static Monstre creerMonstreAleaNorm(int[] moyennes, int[] variances, De deVie) {
 		int[] stats = new int[6];
 		for (int i = 0; i<6; stats[i] = RandomStat.randn(moyennes[i],variances[i++])) {}
-		return new Monstre(stats);
+		return new Monstre(stats,deVie);
 	}
 	
-	public static Monstre[] creerMonstreAleaNorm(int[] moyennes, int[] variances, int nombre) {
+	public static Monstre[] creerMonstreAleaNorm(int[] moyennes, int[] variances, De deVie, int nombre) {
 		Monstre[] mobs = new Monstre[nombre];
-		for (int i = 0; i < nombre; mobs[i] = creerMonstreAleaNorm(moyennes, variances)) {}
+		for (int i = 0; i < nombre; mobs[i] = creerMonstreAleaNorm(moyennes, variances, deVie)) {}
 		return mobs;
 	}
 	
-	public static Monstre creerMonstreAleaNorm(String nom, int[] moyennes, int[] variances) {
+	public static Monstre creerMonstreAleaNorm(String nom, int[] moyennes, int[] variances, De deVie) {
 		int[] stats = new int[6];
 		for (int i = 0; i<6; stats[i] = RandomStat.randn(moyennes[i],variances[i++])) {}
-		return new Monstre(nom,stats);
+		return new Monstre(nom,stats,deVie);
 	}
 	
-	public static Monstre[] creerMonstreAleaNorm(String nom, int[] moyennes, int[] variances, int nombre) {
+	public static Monstre[] creerMonstreAleaNorm(String nom, int[] moyennes, int[] variances, De deVie, int nombre) {
 		Monstre[] mobs = new Monstre[nombre];
-		for (int i = 0; i < nombre; mobs[i] = creerMonstreAleaNorm(nom + " "+(++i),moyennes, variances)) {}
+		for (int i = 0; i < nombre; mobs[i] = creerMonstreAleaNorm(nom + " "+(++i),moyennes, variances, deVie)) {}
 		return mobs;
 	}
-
+	
 	@Override
 	public String toString() {
 		if(this.getNom() == null || this.getNom().equals("")){
-			return "Monstre [Force = " + getForce() + ", Dexterite = " + getDexterite() + ", Constitution = "
+			return "Monstre getDesVie()" + getDesVie() + "[Force = " + getForce() + ", Dexterite = " + getDexterite() + ", Constitution = "
 					+ getConstitution() + ", Intelligence = " + getIntelligence() + ", Sagesse = " + getSagesse()
 					+ ", Charisme = " + getCharisme() + "]";
 		}
 		else{
-			return this.getNom() + " [Force = " + getForce() + ", Dexterite = " + getDexterite() + ", Constitution = "
+			return this.getNom() + "getDesVie()" + getDesVie() + " [Force = " + getForce() + ", Dexterite = " + getDexterite() + ", Constitution = "
 					+ getConstitution() + ", Intelligence = " + getIntelligence() + ", Sagesse = " + getSagesse()
 					+ ", Charisme = " + getCharisme() + "]";
 		}
