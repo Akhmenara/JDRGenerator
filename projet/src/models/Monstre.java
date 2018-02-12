@@ -83,16 +83,13 @@ public class Monstre extends Entite{
 	
 	@Override
 	public String toString() {
-		if(this.getNom() == null || this.getNom().equals("")){
-			return "Monstre getDesVie()" + getDesVie() + "[Force = " + getForce() + ", Dexterite = " + getDexterite() + ", Constitution = "
-					+ getConstitution() + ", Intelligence = " + getIntelligence() + ", Sagesse = " + getSagesse()
-					+ ", Charisme = " + getCharisme() + "]";
-		}
-		else{
-			return this.getNom() + "getDesVie()" + getDesVie() + " [Force = " + getForce() + ", Dexterite = " + getDexterite() + ", Constitution = "
-					+ getConstitution() + ", Intelligence = " + getIntelligence() + ", Sagesse = " + getSagesse()
-					+ ", Charisme = " + getCharisme() + "]";
-		}
+		return "Monstre [getDesVie()=" + getDesVie() + ", getForce()=" + getForce() + ", getDexterite()="
+				+ getDexterite() + ", getConstitution()=" + getConstitution() + ", getIntelligence()="
+				+ getIntelligence() + ", getSagesse()=" + getSagesse() + ", getCharisme()=" + getCharisme()
+				+ ", getNom()=" + getNom() + ", getVieMax()=" + getVieMax() + ", getVie()=" + getVie() + ", getCA()="
+				+ getCA() + ", getReflexes()=" + getReflexes() + ", getVigueur()=" + getVigueur() + ", getVolonte()="
+				+ getVolonte() + ", getBda()=" + getBda() + ", getInitiative()=" + getInitiative() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 	
 	

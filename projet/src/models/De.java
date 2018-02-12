@@ -11,33 +11,56 @@ public class De {
 	private int valeur = 1;
 	private int resultat = 0;
 	private int bonus = 0;
+	private De[] deBonus = null;
 	public De (String str) {
-		str = str.split("P")[0];
-		int indice = Integer.max(str.indexOf("+"),str.indexOf("-"));
-		int bonus;
-		String[] parametres;
-		if (indice > -1) {
-			parametres = str.substring(0,indice).split("d");
+		str = str.split(" ")[0];
+		System.out.println(str);
+		if (str.contains("d")) {
+			System.out.println(str);
+			String[] arguments = str.split("\\+");
+			System.out.println(arguments[0]);
+			//System.out.println(arguments[1]);
+			int indice = arguments[0].indexOf("-");
+			String bonus;
+			String[] parametres;
+			if (indice > -1) {
+				parametres = arguments[0].substring(0,indice).split("d");
+				setNombre(Integer.parseInt(parametres[0]));
+				setValeur(Integer.parseInt(parametres[1]));
+				bonus = arguments[0].substring(indice+1);
+			}else {
+				parametres = arguments[0].split("d");
+				setNombre(Integer.parseInt(parametres[0]));
+				setValeur(Integer.parseInt(parametres[1]));
+				bonus = null;
+			}
 			setNombre(Integer.parseInt(parametres[0]));
 			setValeur(Integer.parseInt(parametres[1]));
-			bonus = Integer.parseInt(str.substring(indice+1));
+			if (bonus != null) {
+				setBonus(Integer.parseInt(bonus));
+			}else {
+				deBonus = new De[arguments.length -1];
+				for (int i = 1; i < arguments.length;i++) {
+					deBonus[i-1] = new De(arguments[i]);
+				}
+			}
+			this.resultat = (int) ((1+this.getNombre()*this.getValeur())/2);
 		}else {
-			parametres = str.split("d");
-			setNombre(Integer.parseInt(parametres[0]));
-			setValeur(Integer.parseInt(parametres[1]));
-			bonus = 0;
+			try{
+				this.bonus = Integer.parseInt(str);
+			}catch (Exception e) {
+				this.bonus = 0;
+			}
+			this.setNombre(0);
+			this.setValeur(1);
 		}
-		setNombre(Integer.parseInt(parametres[0]));
-		setValeur(Integer.parseInt(parametres[1]));
-		setBonus(bonus);
-		this.resultat = (int) ((1+this.getNombre()*this.getValeur())/2);
-		
 	}
+
 	public int getNombre() {
 		return nombre;
 	}
 	public void setNombre(int nombre) {
-		assert (nombre > 0);
+		assert (nombre >= 0);
 		this.nombre = nombre;
 	}
 	/**
