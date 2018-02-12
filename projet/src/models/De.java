@@ -10,10 +10,25 @@ public class De {
 	private int nombre = 1;
 	private int valeur = 1;
 	private int resultat = 0;
+	private int bonus = 0;
 	public De (String str) {
-		String[] parametres = str.split("d");
+		int indice = Integer.max(str.indexOf("+"),str.indexOf("-"));
+		int bonus;
+		String[] parametres;
+		if (indice > -1) {
+			parametres = str.split("d",indice);
+			setNombre(Integer.parseInt(parametres[0]));
+			setValeur(Integer.parseInt(parametres[1]));
+			bonus = Integer.parseInt(str.substring(indice+1));
+		}else {
+			parametres = str.split("d");
+			setNombre(Integer.parseInt(parametres[0]));
+			setValeur(Integer.parseInt(parametres[1]));
+			bonus = 0;
+		}
 		setNombre(Integer.parseInt(parametres[0]));
 		setValeur(Integer.parseInt(parametres[1]));
+		setBonus(bonus);
 		this.resultat = (int) ((1+this.getNombre()*this.getValeur())/2);
 		
 	}
@@ -52,6 +67,14 @@ public class De {
 	private void setResultat(int resultat) {
 		assert (resultat >= valeur);
 		this.resultat = resultat;
+	}
+	
+	private int getBonus() {
+		return this.bonus;
+	}
+	
+	private void setBonus(int bonus) {
+		this.bonus = bonus;
 	}
 	/**
 	 * Lance le dés et change la valeur du résultat.
