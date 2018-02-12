@@ -103,8 +103,17 @@ public class Database {
 				String nom = result.getString("nom_monstre");
 				
 				// Stats of the monster
-				int[] stats = {result.getInt("for_monstre"), result.getInt("dex_monstre"), result.getInt("con_monstre"), 
-						result.getInt("int_monstre"), result.getInt("sag_monstre"), result.getInt("cha_monstre")};
+				String[] statsStr = {result.getString("for_monstre"), result.getString("dex_monstre"), result.getString("con_monstre"), 
+						result.getString("int_monstre"), result.getString("sag_monstre"), result.getString("cha_monstre")};
+				
+				int[] stats = new int[statsStr.length];
+				
+				for(int i = 0 ; i < statsStr.length ; i++){
+					if(statsStr[i].contains("-")){
+						statsStr[i].replace('-', '0');
+					}
+					stats[i] = Integer.parseInt(statsStr[i]);
+				}
 				
 				// Var needed to be store in model
 				// String size = result.getString("size");
@@ -138,8 +147,17 @@ public class Database {
 				String nom = result.getString("nom_monstre");
 				
 				// Stats of the monster
-				int[] stats = {result.getInt("for_monstre"), result.getInt("dex_monstre"), result.getInt("con_monstre"), 
-						result.getInt("int_monstre"), result.getInt("sag_monstre"), result.getInt("cha_monstre")};
+				String[] statsStr = {result.getString("for_monstre"), result.getString("dex_monstre"), result.getString("con_monstre"), 
+						result.getString("int_monstre"), result.getString("sag_monstre"), result.getString("cha_monstre")};
+				
+				int[] stats = new int[statsStr.length];
+				
+				for(int i = 0 ; i < statsStr.length ; i++){
+					if(statsStr[i].contains("-")){
+						statsStr[i].replace('-', '0');
+					}
+					stats[i] = Integer.parseInt(statsStr[i]);
+				}
 				
 				// Var needed to be store in model
 				// String size = result.getString("size");
@@ -174,9 +192,17 @@ public class Database {
 				String nomRet = result.getString("nom_monstre");
 				
 				// Stats of the monster
-				int[] stats = {result.getInt("for_monstre"), result.getInt("dex_monstre"), result.getInt("con_monstre"), 
-						result.getInt("int_monstre"), result.getInt("sag_monstre"), result.getInt("cha_monstre")};
+				String[] statsStr = {result.getString("for_monstre"), result.getString("dex_monstre"), result.getString("con_monstre"), 
+						result.getString("int_monstre"), result.getString("sag_monstre"), result.getString("cha_monstre")};
 				
+				int[] stats = new int[statsStr.length];
+				
+				for(int i = 0 ; i < statsStr.length ; i++){
+					if(statsStr[i].contains("-")){
+						statsStr[i].replace('-', '0');
+					}
+					stats[i] = Integer.parseInt(statsStr[i]);
+				}				
 				// Var needed to be store in model
 				// String size = result.getString("size");
 				

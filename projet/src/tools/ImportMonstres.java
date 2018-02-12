@@ -60,12 +60,15 @@ public class ImportMonstres {
 					
 			//---------------------------------------
 			// Create the table to store the monsters
+			Statement dropTable = (Statement) connection.createStatement();
+			dropTable.executeUpdate("DROP TABLE IF EXISTS monstres");
+			
 			Statement createTable = (Statement) connection.createStatement();
-			createTable.executeUpdate("CREATE OR REPLACE TABLE `monstres` " +
-					"(`id_monstre` int(11) NOT NULL, `str_monstre` varchar(255) DEFAULT NULL, " +
+			createTable.executeUpdate("CREATE TABLE `monstres` " +
+					"(`id_monstre` int(11) NOT NULL, `for_monstre` varchar(255) DEFAULT NULL, " +
 					"`dex_monstre` varchar(255) DEFAULT NULL, `con_monstre` varchar(255) DEFAULT NULL, " +
 					"`int_monstre` varchar(255) DEFAULT NULL, `sag_monstre` varchar(255) DEFAULT NULL, " +
-					"`cha_monstre` varchar(255) DEFAULT NULL, `name_monstre` varchar(255) DEFAULT NULL, " +
+					"`cha_monstre` varchar(255) DEFAULT NULL, `nom_monstre` varchar(255) DEFAULT NULL, " +
 					"`hp_monstre` varchar(255) DEFAULT NULL, `vig_monstre` varchar(255) DEFAULT NULL, " +
 					"`ref_monstre` varchar(255) DEFAULT NULL, `vol_monstre` varchar(255) DEFAULT NULL)");
 			Statement primaryKey = (Statement) connection.createStatement();
@@ -123,7 +126,7 @@ public class ImportMonstres {
 				String will = obj.get("Will").toString();
 				
 				
-				String insertQuery = "INSERT INTO `monstres`(`str_monstre`, `dex_monstre`, `con_monstre`, `int_monstre`, `sag_monstre`, `cha_monstre`, `name_monstre`, `hp_monstre`, `vig_monstre`, `ref_monstre`, `vol_monstre`) " +
+				String insertQuery = "INSERT INTO `monstres`(`for_monstre`, `dex_monstre`, `con_monstre`, `int_monstre`, `sag_monstre`, `cha_monstre`, `nom_monstre`, `hp_monstre`, `vig_monstre`, `ref_monstre`, `vol_monstre`) " +
 						"VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 				
 				PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(insertQuery);
