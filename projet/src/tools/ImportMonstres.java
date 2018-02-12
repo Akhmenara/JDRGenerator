@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 /**
@@ -60,13 +61,17 @@ public class ImportMonstres {
 			//---------------------------------------
 			// Create the table to store the monsters
 			Statement createTable = (Statement) connection.createStatement();
-			createTable.executeUpdate("CREATE TABLE `monstres` (`id_monstre` int(11) NOT NULL, `nom_monstre` varchar(99) DEFAULT NULL, `taille_monstre` enum('Tiny','Small','Medium','Large','Huge','Gargantuan') NOT NULL, `for_monstre` int(11) DEFAULT NULL, `dex_monstre` int(11) DEFAULT NULL, `con_monstre` int(11) DEFAULT NULL, `int_monstre` int(11) DEFAULT NULL, `sag_monstre` int(11) DEFAULT NULL, `cha_monstre` int(11) DEFAULT NULL)");
+			createTable.executeUpdate("CREATE OR REPLACE TABLE `monstres` " +
+					"(`id_monstre` int(11) NOT NULL, `str_monstre` varchar(255) DEFAULT NULL, " +
+					"`dex_monstre` varchar(255) DEFAULT NULL, `con_monstre` varchar(255) DEFAULT NULL, " +
+					"`int_monstre` varchar(255) DEFAULT NULL, `sag_monstre` varchar(255) DEFAULT NULL, " +
+					"`cha_monstre` varchar(255) DEFAULT NULL, `name_monstre` varchar(255) DEFAULT NULL, " +
+					"`hp_monstre` varchar(255) DEFAULT NULL, `vig_monstre` varchar(255) DEFAULT NULL, " +
+					"`ref_monstre` varchar(255) DEFAULT NULL, `vol_monstre` varchar(255) DEFAULT NULL)");
 			Statement primaryKey = (Statement) connection.createStatement();
-			primaryKey.executeUpdate("ALTER TABLE `Monstres` ADD PRIMARY KEY (`id_monstre`);");
+			primaryKey.executeUpdate("ALTER TABLE `monstres` ADD PRIMARY KEY (`id_monstre`)");
 			Statement autoInc = (Statement) connection.createStatement();
-			autoInc.executeUpdate("ALTER TABLE `Monstres` MODIFY `id_monstre` int(11) NOT NULL AUTO_INCREMENT;");
-			Statement addHP = (Statement) connection.createStatement();
-			addHP.executeUpdate("ALTER TABLE `monstres` ADD `hp_monstre` VARCHAR(255) NULL DEFAULT NULL AFTER `cha_monstre`;");
+			autoInc.executeUpdate("ALTER TABLE `monstres` MODIFY `id_monstre` int(11) NOT NULL AUTO_INCREMENT");
 			//---------------------------------------			
 			
 			long debut = System.currentTimeMillis();
@@ -79,45 +84,66 @@ public class ImportMonstres {
 			}
 			JSONArray arr = new JSONArray(jsonData);
 			
-			long fin = System.currentTimeMillis();
-			long duree = fin-debut;
 			System.out.println("JSONArray length : " + arr.length());
 			
 			/*
-			 * Exemple of datas extracted from the JSON file and stored in db
+			 * Example of datas extracted from the JSON file and stored in db
 			 * {
-			 *   "name": "Goblin",
-			 *   "size": "Small",
-			 *   "strength": 8,
-			 *   "dexterity": 14,
-			 *   "constitution": 10,
-			 *   "intelligence": 10,
-			 *   "wisdom": 8,
-			 *   "charisma": 8
-			 *   "hit_dice": "2d6"
+			 *  "Name":"Goblin",
+			 *  "Str":11,
+			 *  "Dex":15,
+			 *	"Con":"12",
+			 *	"Int":"10",
+			 *	"Wis":9,
+			 *	"Cha":6,
+			 *  "HD":"1d10+1",
+			 *	"Fort":3,
+			 *	"Ref":2,
+			 *	"Will":-1,
 			 * }
 	         */
 			int nbInsert = 0;
 			Statement insertInto = (Statement) connection.createStatement();
-			for(int i = 0 ; i < arr.length()-1 ; i++){
+			for(int i = 0 ; i < arr.length() ; i++){
 				JSONObject obj = arr.getJSONObject(i);
-				String name = obj.getString("name");
+				String name = obj.getString("Name");
 				if(name.contains("'")){
 					name = name.replace("'", " ");
 				}
-				String size = obj.getString("size");
-				int str = obj.getInt("strength");
-				int dex = obj.getInt("dexterity");
-				int con = obj.getInt("constitution");
-				int intel = obj.getInt("intelligence");
-				int wis = obj.getInt("wisdom");
-				int cha = obj.getInt("charisma");
-				String hp = obj.getString("hit_dice");
+				String str = obj.get("Str").toString();
+				String dex = obj.get("Dex").toString();
 				
-				insertInto.executeUpdate("INSERT INTO `monstres` (`id_monstre`, `nom_monstre`, `taille_monstre`, `for_monstre`, `dex_monstre`, `con_monstre`, `int_monstre`, `sag_monstre`, `cha_monstre`, `hp_monstre`) VALUES (NULL, '" + name + "', '" + size + "', " + str + ", " + dex + ", " + con + ", " + intel + ", " + wis + ", " + cha + ", '" + hp + "');");
+				String con = obj.get("Con").toString();
+				String intel = obj.get("Int").toString();
+				String wis = obj.get("Wis").toString();
+				String cha = obj.get("Cha").toString();
+				String hp = obj.getString("HD").toString();
+				String fort = obj.get("Fort").toString();
+				String ref = obj.get("Ref").toString();
+				String will = obj.get("Will").toString();
+				
+				
+				String insertQuery = "INSERT INTO `monstres`(`str_monstre`, `dex_monstre`, `con_monstre`, `int_monstre`, `sag_monstre`, `cha_monstre`, `name_monstre`, `hp_monstre`, `vig_monstre`, `ref_monstre`, `vol_monstre`) " +
+						"VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+				
+				PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(insertQuery);
+				preparedStatement.setString(1, str);
+				preparedStatement.setString(2, dex);
+				preparedStatement.setString(3, con);
+				preparedStatement.setString(4, intel);
+				preparedStatement.setString(5, wis);
+				preparedStatement.setString(6, cha);
+				preparedStatement.setString(7, name);
+				preparedStatement.setString(8, hp);
+				preparedStatement.setString(9, fort);
+				preparedStatement.setString(10, ref);
+				preparedStatement.setString(11, will);
+				preparedStatement.executeUpdate();
+				
 				nbInsert++;
 			}
-			
+			long fin = System.currentTimeMillis();
+			long duree = fin-debut;
 			System.out.println("Temps d'extraction de " + nbLines + " lignes du JSON et d'insertion de " + nbInsert + " lignes en BD : " + duree + "ms");
 			
 		} catch (Exception e) {
