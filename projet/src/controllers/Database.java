@@ -109,8 +109,8 @@ public class Database {
 				int[] stats = new int[statsStr.length];
 				
 				for(int i = 0 ; i < statsStr.length ; i++){
-					if(statsStr[i].contains("-")){
-						statsStr[i].replace('-', '0');
+					if(statsStr[i].equals("-")){
+						statsStr[i]= "0";
 					}
 					stats[i] = Integer.parseInt(statsStr[i]);
 				}
@@ -119,7 +119,7 @@ public class Database {
 				// String size = result.getString("size");
 				
 				// Add new object Monstre to the list to be returned
-				list.add(new Monstre(nom, stats, new De(result.getString("hp_monstre"))));
+				list.add(new Monstre(nom, stats, new De("2d8")));
 			}
 			
 		} catch (SQLException e) {
@@ -153,8 +153,8 @@ public class Database {
 				int[] stats = new int[statsStr.length];
 				
 				for(int i = 0 ; i < statsStr.length ; i++){
-					if(statsStr[i].contains("-")){
-						statsStr[i].replace('-', '0');
+					if(statsStr[i].equals("-")){
+						statsStr[i]= "0";
 					}
 					stats[i] = Integer.parseInt(statsStr[i]);
 				}
@@ -198,11 +198,12 @@ public class Database {
 				int[] stats = new int[statsStr.length];
 				
 				for(int i = 0 ; i < statsStr.length ; i++){
-					if(statsStr[i].contains("-")){
-						statsStr[i].replace('-', '0');
+					if(statsStr[i].equals("-")){
+						statsStr[i]= "0";
 					}
 					stats[i] = Integer.parseInt(statsStr[i]);
-				}				
+				}
+				
 				// Var needed to be store in model
 				// String size = result.getString("size");
 				
