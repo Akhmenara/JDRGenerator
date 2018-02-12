@@ -12,11 +12,12 @@ public class De {
 	private int resultat = 0;
 	private int bonus = 0;
 	public De (String str) {
+		str = str.split("P")[0];
 		int indice = Integer.max(str.indexOf("+"),str.indexOf("-"));
 		int bonus;
 		String[] parametres;
 		if (indice > -1) {
-			parametres = str.split("d",indice);
+			parametres = str.substring(0,indice).split("d");
 			setNombre(Integer.parseInt(parametres[0]));
 			setValeur(Integer.parseInt(parametres[1]));
 			bonus = Integer.parseInt(str.substring(indice+1));

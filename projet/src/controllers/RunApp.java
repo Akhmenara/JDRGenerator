@@ -1,7 +1,6 @@
 package controllers;
 
 import views.Accueil;
-import views.FenetreAccueil;
 
 public class RunApp {
 
