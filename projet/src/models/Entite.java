@@ -10,77 +10,135 @@ abstract class Entite {
 	private String nom;
 	private int vieMax;
 	private int vie;
-
-	protected int getForce() {
+	private int cA;
+	private int reflexes;
+	private int vigueur;
+	private int volonte;
+	private int bda;
+	private int initiative;
+	
+	public int getForce() {
 		return force;
 	}
 	
-	protected void setForce(int force) {
+	public void setForce(int force) {
 		this.force = verif(force);
 	}
 	
-	protected int getDexterite() {
+	public int getDexterite() {
 		return dexterite;
 	}
 	
-	protected void setDexterite(int dexterite) {
+	public void setDexterite(int dexterite) {
 		this.dexterite = verif(dexterite);
 	}
 	
-	protected int getConstitution() {
+	public int getConstitution() {
 		return constitution;
 	}
 	
-	protected void setConstitution(int constitution) {
+	public void setConstitution(int constitution) {
 		this.constitution = verif(constitution);
 	}
 	
-	protected int getIntelligence() {
+	public int getIntelligence() {
 		return intelligence;
 	}
 	
-	protected void setIntelligence(int intelligence) {
+	public void setIntelligence(int intelligence) {
 		this.intelligence = verif(intelligence);
 	}
 	
-	protected int getSagesse() {
+	public int getSagesse() {
 		return sagesse;
 	}
 	
-	protected void setSagesse(int sagesse) {
+	public void setSagesse(int sagesse) {
 		this.sagesse = verif(sagesse);
 	}
 	
-	protected int getCharisme() {
+	public int getCharisme() {
 		return charisme;
 	}
 	
-	protected void setCharisme(int charisme) {
+	public void setCharisme(int charisme) {
 		this.charisme = verif(charisme);
 	}
 	
-	protected String getNom() {
+	public String getNom() {
 		return nom;
 	}
 	
-	protected void setNom(String nom) {
+	public void setNom(String nom) {
 		this.nom = nom;
 	}
 	
-	protected int getVieMax() {
+	public int getVieMax() {
 		return vieMax;
 	}
 
-	protected void setVieMax(int vieMax) {
+	public void setVieMax(int vieMax) {
 		this.vieMax = vieMax;
 	}
 	
-	protected int getVie() {
+	public int getVie() {
 		return vie;
 	}
 
-	protected void setVie(int vie) {
+	public void setVie(int vie) {
 		this.vie = vie;
+	}
+	
+	public int getCA() {
+		return cA;
+	}
+	
+	public void setCA(int cA) {
+		this.cA = cA;
+	}
+	
+	public int getReflexes() {
+		return reflexes;
+	}
+
+	public void setReflexes(int reflexes) {
+		this.reflexes = reflexes;
+	}
+
+	public int getVigueur() {
+		return vigueur;
+	}
+
+	public void setVigueur(int vigueur) {
+		this.vigueur = vigueur;
+	}
+
+	public int getVolonte() {
+		return volonte;
+	}
+
+	public void setVolonte(int volonte) {
+		this.volonte = volonte;
+	}
+
+	public int getBda() {
+		return bda;
+	}
+
+	public void setBda(int bda) {
+		this.bda = bda;
+	}
+
+	public int getInitiative() {
+		return initiative;
+	}
+	
+	public void setInitiative(int initiative) {
+		this.initiative = verif(initiative + this.bonus(this.getDexterite()));
+	}
+	
+	public int bonus(int stat) {
+		return Integer.divideUnsigned(stat, 2) - 5;
 	}
 	
 	private int verif(int x) {

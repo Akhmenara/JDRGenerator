@@ -34,81 +34,13 @@ public class Monstre extends Entite{
 		this.setDesVie(new De("1d1"));
 		this.setVieMax(getDesVie().getResultat());
 		this.setVie(getVieMax());
+		this.setBda(0);
+		this.setCA(10);
+		this.setInitiative(0);
+		this.setReflexes(0);
+		this.setVigueur(0);
+		this.setVolonte(0);
 	}
-	
-	
-	public int getForce() {
-		return super.getForce();
-	}
-	
-	public void setForce(int force) {
-		super.setForce(force);
-	}
-	
-	public int getDexterite() {
-		return super.getDexterite();
-	}
-	
-	public void setDexterite(int dexterite) {
-		super.setDexterite(dexterite);
-	}
-	
-	public int getConstitution() {
-		return super.getConstitution();
-	}
-	
-	public void setConstitution(int constitution) {
-		super.setConstitution(constitution);
-	}
-	
-	public int getIntelligence() {
-		return super.getIntelligence();
-	}
-	
-	public void setIntelligence(int intelligence) {
-		super.setIntelligence(intelligence);
-	}
-	
-	public int getSagesse() {
-		return super.getSagesse();
-	}
-	
-	public void setSagesse(int sagesse) {
-		super.setSagesse(sagesse);
-	}
-	
-	public int getCharisme() {
-		return super.getCharisme();
-	}
-	
-	public void setCharisme(int charisme) {
-		super.setCharisme(charisme);
-	}
-	
-	public String getNom() {
-		return super.getNom();
-	}
-	
-	public void setNom(String nom) {
-		super.setNom(nom);
-	}
-	
-	public int getVieMax() {
-		return super.getVieMax();
-	}
-
-	public void setVieMax(int vieMax) {
-		super.setVieMax(vieMax);
-	}
-	
-	public int getVie() {
-		return super.getVie();
-	}
-
-	public void setVie(int vie) {
-		super.setVie(vie);
-	}
-	
 	public De getDesVie() {
 		return desVie;
 	}
@@ -124,7 +56,11 @@ public class Monstre extends Entite{
 		System.out.println(newDeVie);
 		newDeVie.lancer();
 		System.out.println(newDeVie);
-		return new Monstre(stats,newDeVie);
+		Monstre mob = new Monstre(stats,newDeVie);
+		De d20 = new De("1d20");
+		d20.lancer();
+		mob.setInitiative(d20.getResultat());
+		return mob;
 	}
 	
 	public static Monstre[] creerMonstreAleaNorm(int[] moyennes, int[] variances, De deVie, int nombre) {
