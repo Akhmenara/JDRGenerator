@@ -111,14 +111,8 @@ public class Accueil extends JFrame {
 				
 					Monstre monstreBase = (Monstre)(choix.get(0));
 					int nbrMonstre = (int)choix.get(1);
-					int[] esperances = {monstreBase.getForce(),
-						monstreBase.getDexterite(),
-						monstreBase.getConstitution(),
-						monstreBase.getIntelligence(),
-						monstreBase.getSagesse(),
-						monstreBase.getCharisme()};
 					int[] variances = {variance,variance,variance,variance,variance,variance};
-					Monstre[] mobsSuivant = Monstre.creerMonstreAleaNorm(monstreBase.getNom(),esperances,variances,monstreBase.getDesVie(),nbrMonstre);
+					Monstre[] mobsSuivant = monstreBase.engendrer(nbrMonstre, variances);
 					for(int j = 0; j < mobsSuivant.length;listeMobs.add(mobsSuivant[j++]));
 				}
 				Monstre[] mobs = new Monstre[listeMobs.size()];

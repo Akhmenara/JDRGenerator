@@ -1,68 +1,69 @@
 package models;
 
 abstract class Entite {
-	private int force;
+	private String nom;
+	/*private int force;
 	private int dexterite;
 	private int constitution;
 	private int intelligence;
 	private int sagesse;
 	private int charisme;
-	private String nom;
 	private int vieMax;
 	private int vie;
 	private int cA;
 	private int reflexes;
 	private int vigueur;
 	private int volonte;
-	private int bda;
+	private int bda;*/
+	private Stat stat = new Stat();
 	private int initiative;
 	
 	public int getForce() {
-		return force;
+		return stat.get("Force");
 	}
 	
 	public void setForce(int force) {
-		this.force = verif(force);
+		stat.replace("Force", verif(force));
 	}
 	
 	public int getDexterite() {
-		return dexterite;
+		return stat.get("Dexterite");
 	}
 	
 	public void setDexterite(int dexterite) {
-		this.dexterite = verif(dexterite);
+		stat.replace("Dexterite",verif(dexterite));
 	}
 	
 	public int getConstitution() {
-		return constitution;
+		return stat.get("Constitution");
 	}
 	
 	public void setConstitution(int constitution) {
-		this.constitution = verif(constitution);
+		stat.replace("Constitution", verif(constitution));
 	}
 	
 	public int getIntelligence() {
-		return intelligence;
+		return stat.get("Intelligence");
 	}
 	
 	public void setIntelligence(int intelligence) {
-		this.intelligence = verif(intelligence);
+		stat.replace("Intelligence", verif(intelligence));
 	}
 	
 	public int getSagesse() {
-		return sagesse;
+		return stat.get("Sagesse");
 	}
 	
 	public void setSagesse(int sagesse) {
-		this.sagesse = verif(sagesse);
+		stat.replace("Sagesse", verif(sagesse));
 	}
 	
 	public int getCharisme() {
-		return charisme;
+		return stat.get("Charisme");
 	}
 	
 	public void setCharisme(int charisme) {
-		this.charisme = verif(charisme);
+		stat.replace("Charisme", verif(charisme));
 	}
 	
 	public String getNom() {
@@ -74,59 +75,59 @@ abstract class Entite {
 	}
 	
 	public int getVieMax() {
-		return vieMax;
+		return stat.get("VieMax");
 	}
 
 	public void setVieMax(int vieMax) {
-		this.vieMax = vieMax;
+		stat.replace("VieMax", vieMax);
 	}
 	
 	public int getVie() {
-		return vie;
+		return stat.get("Vie");
 	}
 
 	public void setVie(int vie) {
-		this.vie = vie;
+		stat.replace("Vie", vie);
 	}
 	
 	public int getCA() {
-		return cA;
+		return stat.get("CA");
 	}
 	
 	public void setCA(int cA) {
-		this.cA = cA;
+		stat.replace("CA", cA);
 	}
 	
 	public int getReflexes() {
-		return reflexes;
+		return stat.get("Reflexes");
 	}
 
 	public void setReflexes(int reflexes) {
-		this.reflexes = reflexes;
+		stat.replace("Reflexes", reflexes);
 	}
 
 	public int getVigueur() {
-		return vigueur;
+		return stat.get("Vigueur");
 	}
 
 	public void setVigueur(int vigueur) {
-		this.vigueur = vigueur;
+		stat.replace("Vigueur", vigueur);
 	}
 
 	public int getVolonte() {
-		return volonte;
+		return stat.get("Volonte");
 	}
 
 	public void setVolonte(int volonte) {
-		this.volonte = volonte;
+		stat.replace("Volonte", volonte);
 	}
 
 	public int getBda() {
-		return bda;
+		return stat.get("Bda");
 	}
 
 	public void setBda(int bda) {
-		this.bda = bda;
+		stat.replace("Bda", bda);
 	}
 
 	public int getInitiative() {

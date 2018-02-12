@@ -14,12 +14,8 @@ public class De {
 	private De[] deBonus = null;
 	public De (String str) {
 		str = str.split(" ")[0];
-		System.out.println(str);
 		if (str.contains("d")) {
-			System.out.println(str);
 			String[] arguments = str.split("\\+");
-			System.out.println(arguments[0]);
-			//System.out.println(arguments[1]);
 			int indice = arguments[0].indexOf("-");
 			String bonus;
 			String[] parametres;
@@ -112,7 +108,20 @@ public class De {
 		this.setResultat(resultat);
 	}
 	public De clone() {
-		return new De(this.nombre+"d"+this.resultat);
+		De newDe = new De("1d1");
+		newDe.nombre = nombre;
+		newDe.valeur = valeur;
+		newDe.resultat = resultat;
+		newDe.bonus = bonus;
+		if (deBonus != null) {
+			newDe.deBonus = new De[deBonus.length];
+			System.out.println("deBonus.length : "+ deBonus.length);
+			System.out.println(deBonus[0]);
+			for(int i = 0; i < deBonus.length; newDe.deBonus[i] = deBonus[i++].clone());
+		}else {
+			newDe.deBonus = null;
+		}
+		return newDe;
 	}
 	
 	public String toString() {

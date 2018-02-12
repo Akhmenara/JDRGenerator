@@ -6,6 +6,7 @@ public class Monstre extends Entite{
 	
 	public Monstre(String nom, int[] stats, De desVie) {
 		this(nom,stats);
+		System.out.println(desVie);
 		this.setDesVie(desVie);
 		this.setVieMax(desVie.getResultat());
 		this.setVie(getVieMax());
@@ -49,6 +50,13 @@ public class Monstre extends Entite{
 		this.desVie = desVie;
 	}
 
+	public Monstre[] engendrer(int nombre, int[] variances) {
+		Monstre[] mobs = new Monstre[nombre];
+		int[] moyennes = {getForce(), getDexterite(), getConstitution(), getIntelligence(), getSagesse(), getCharisme()};
+		for (int i = 0; i < nombre; mobs[i] = creerMonstreAleaNorm(getNom() + " "+(++i),moyennes, variances, getDesVie()));
+		return mobs;
+	}
+	
 	public static Monstre creerMonstreAleaNorm(int[] moyennes, int[] variances, De deVie) {
 		int[] stats = new int[6];
 		for (int i = 0; i<6; stats[i] = RandomStat.randn(moyennes[i],variances[i++])) {}
@@ -65,7 +73,7 @@ public class Monstre extends Entite{
 	
 	public static Monstre[] creerMonstreAleaNorm(int[] moyennes, int[] variances, De deVie, int nombre) {
 		Monstre[] mobs = new Monstre[nombre];
-		for (int i = 0; i < nombre; mobs[i] = creerMonstreAleaNorm(moyennes, variances, deVie));
+		for (int i = 0; i < nombre; mobs[i++] = creerMonstreAleaNorm(moyennes, variances, deVie));
 		return mobs;
 	}
 	
