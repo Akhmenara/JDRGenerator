@@ -119,7 +119,7 @@ public class Database {
 				// String size = result.getString("size");
 				
 				// Add new object Monstre to the list to be returned
-				list.add(new Monstre(nom, stats, new De("2d8")));
+				list.add(new Monstre(nom, stats, new De(result.getString("hp_monstre"))));
 			}
 			
 		} catch (SQLException e) {
