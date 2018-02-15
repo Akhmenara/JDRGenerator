@@ -4,6 +4,13 @@ public class Monstre extends Entite{
 	
 	private De desVie;
 	
+	public Monstre(String nom, Stat stats, De desVie) {
+		super(nom, stats);
+		this.setDesVie(desVie);
+		this.setVieMax(desVie.getResultat());
+		this.setVie(getVieMax());
+	}
+	
 	public Monstre(String nom, int[] stats, De desVie) {
 		this(nom,stats);
 		System.out.println(desVie);
@@ -25,6 +32,7 @@ public class Monstre extends Entite{
 	}
 	
 	public Monstre(int[] stats) {
+		Stat stat = new Stat();
 		this.setForce(stats[0]);
 		this.setDexterite(stats[1]);
 		this.setConstitution(stats[2]);
@@ -53,39 +61,38 @@ public class Monstre extends Entite{
 	public Monstre[] engendrer(int nombre, int[] variances) {
 		Monstre[] mobs = new Monstre[nombre];
 		int[] moyennes = {getForce(), getDexterite(), getConstitution(), getIntelligence(), getSagesse(), getCharisme()};
-		for (int i = 0; i < nombre; mobs[i] = creerMonstreAleaNorm(getNom() + " "+(++i),moyennes, variances, getDesVie()));
+		for (int i = 0; i < nombre; mobs[i] = creerMonstreAleaNorm(getNom() + " "+(++i),this, variances));
 		return mobs;
 	}
 	
-	public static Monstre creerMonstreAleaNorm(int[] moyennes, int[] variances, De deVie) {
-		int[] stats = new int[6];
-		for (int i = 0; i<6; stats[i] = RandomStat.randn(moyennes[i],variances[i++])) {}
-		De newDeVie = deVie.clone();
-		System.out.println(newDeVie);
+	public static Monstre creerMonstreAleaNorm(Monstre base, int[] variances) {
+		Stat stat = base.getStat();
+		int[] moyennes = {base.getForce(), base.getDexterite(), base.getConstitution(), base.getIntelligence(), base.getSagesse(), base.getCharisme()};
+		for (int i = 0; i<6; stat.replace(Stat.CLES[i], RandomStat.randn(moyennes[i],variances[i++]))) {}
+		De newDeVie = base.getDesVie().clone();
 		newDeVie.lancer();
-		System.out.println(newDeVie);
-		Monstre mob = new Monstre(stats,newDeVie);
+		Monstre mob = new Monstre("",stat,newDeVie);
 		De d20 = new De("1d20");
 		d20.lancer();
 		mob.setInitiative(d20.getResultat());
 		return mob;
 	}
 	
-	public static Monstre[] creerMonstreAleaNorm(int[] moyennes, int[] variances, De deVie, int nombre) {
+	public static Monstre[] creerMonstreAleaNorm(Monstre base, int[] variances, int nombre) {
 		Monstre[] mobs = new Monstre[nombre];
-		for (int i = 0; i < nombre; mobs[i++] = creerMonstreAleaNorm(moyennes, variances, deVie));
+		for (int i = 0; i < nombre; mobs[i++] = creerMonstreAleaNorm(base, variances));
 		return mobs;
 	}
 	
-	public static Monstre creerMonstreAleaNorm(String nom, int[] moyennes, int[] variances, De deVie) {
-		Monstre mob = creerMonstreAleaNorm(moyennes,variances,deVie);
+	public static Monstre creerMonstreAleaNorm(String nom, Monstre base, int[] variances) {
+		Monstre mob = creerMonstreAleaNorm(base,variances);
 		mob.setNom(nom);
 		return mob;
 	}
 	
-	public static Monstre[] creerMonstreAleaNorm(String nom, int[] moyennes, int[] variances, De deVie, int nombre) {
+	public static Monstre[] creerMonstreAleaNorm(String nom, Monstre base, int[] variances, int nombre) {
 		Monstre[] mobs = new Monstre[nombre];
-		for (int i = 0; i < nombre; mobs[i] = creerMonstreAleaNorm(nom + " "+(++i),moyennes, variances, deVie));
+		for (int i = 0; i < nombre; mobs[i] = creerMonstreAleaNorm(nom + " "+(++i),base, variances));
 		return mobs;
 	}
 	

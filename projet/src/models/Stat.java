@@ -5,6 +5,9 @@ import java.util.Map;
 
 public class Stat extends Hashtable<String, Integer> {
 
+	public static final String[] CLES = {"Force", "Dexterite",  "Constitution", "Intelligence", "Sagesse", "Charisme",
+			"VieMax", "Vie", "CA", "Reflexes", "Vigueur", "Volonte", "Bda"};
+	
 	public Stat() {
 		super();
 		put("Force", 0);

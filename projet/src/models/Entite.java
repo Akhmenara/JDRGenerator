@@ -18,6 +18,18 @@ abstract class Entite {
 	private Stat stat = new Stat();
 	private int initiative;
 	
+	
+	
+	public Entite(String nom, Stat stats) {
+		this.setNom(nom);
+		this.setStat(stats);
+		this.setInitiative(0);
+	}
+	
+	public Entite() {
+		
+	}
+	
 	public int getForce() {
 		return stat.get("Force");
 	}
@@ -136,6 +148,20 @@ abstract class Entite {
 	
 	public void setInitiative(int initiative) {
 		this.initiative = verif(initiative + this.bonus(this.getDexterite()));
+	}
+	
+	public Stat getStat() {
+		Stat stats = new Stat();
+		for(String cle : Stat.CLES) {
+			stats.replace(cle, this.stat.get(cle));
+		}
+		return stats;
+	}
+	
+	public void setStat(Stat stats) {
+		for(String cle : Stat.CLES) {
+			this.stat.replace(cle, stats.get(cle));
+		}
 	}
 	
 	public int bonus(int stat) {
